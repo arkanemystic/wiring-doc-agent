@@ -3,7 +3,7 @@ import json
 import logging
 from types import SimpleNamespace
 
-import fitz
+import pymupdf
 
 from app.config import Settings
 from app.service import WireExtractionService
@@ -20,7 +20,7 @@ class FakeResponses:
 
 
 def sample_pdf(page_count: int = 1) -> bytes:
-    document = fitz.open()
+    document = pymupdf.open()
     try:
         for page_number in range(page_count):
             page = document.new_page()

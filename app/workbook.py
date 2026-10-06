@@ -1,6 +1,7 @@
 from io import BytesIO
 
 from openpyxl import Workbook
+from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.worksheet.table import Table, TableStyleInfo
@@ -22,6 +23,18 @@ LOW_CONFIDENCE_FILL = PatternFill("solid", fgColor="FFE699")
 REVIEW_REQUIRED_FILL = PatternFill("solid", fgColor="F4CCCC")
 
 
+def text_cell(worksheet, row: int, column: int, value: str | None):
+    """Write untrusted text as a literal string: no formulas, no illegal control characters."""
+    cell = worksheet.cell(row=row, column=column)
+    if value is None:
+        return cell
+    cell.value = ILLEGAL_CHARACTERS_RE.sub("", value)
+    cell.data_type = "s"
+    if cell.value.startswith(("=", "+", "-", "@", "\t", "\r")):
+        cell.quotePrefix = True
+    return cell
+
+
 def create_extraction_workbook(
     results: list[ExtractionResponse], confidence_threshold: float
 ) -> bytes:
@@ -29,7 +42,7 @@ def create_extraction_workbook(
     worksheet = workbook.active
     worksheet.title = "Results"
 
-    last_column = len(FIELDS) + 2
+    last_column = len(FIELDS) + 3
     worksheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=last_column)
     title_cell = worksheet.cell(row=1, column=1, value="Wire Instruction Extraction Results")
     title_cell.font = Font(bold=True, size=14, color="FFFFFF")
@@ -44,7 +57,12 @@ def create_extraction_workbook(
     worksheet.cell(row=3, column=1, value=f"Confidence threshold: {confidence_threshold:.0%}")
     worksheet.merge_cells(start_row=3, start_column=1, end_row=3, end_column=last_column)
 
-    headers = ["Document Source", *(label for _, label in FIELDS), "Manual Review Required"]
+    headers = [
+        "Document Source",
+        *(label for _, label in FIELDS),
+        "Manual Review Required",
+        "Notes",
+    ]
     for column, header in enumerate(headers, start=1):
         cell = worksheet.cell(row=5, column=column, value=header)
         cell.font = Font(bold=True, color="FFFFFF")
@@ -52,21 +70,28 @@ def create_extraction_workbook(
         cell.alignment = Alignment(horizontal="center", wrap_text=True)
 
     for row, result in enumerate(results, start=6):
-        worksheet.cell(row=row, column=1, value=result.document_source)
+        text_cell(worksheet, row, 1, result.document_source)
         for column, (attribute, _) in enumerate(FIELDS, start=2):
             field = getattr(result.fields, attribute)
-            cell = worksheet.cell(row=row, column=column, value=field.value)
+            cell = text_cell(worksheet, row, column, field.value)
             cell.comment = Comment(
                 f"Confidence: {field.confidence:.0%}\nPage: {field.page or 'Unavailable'}",
                 "Wiring Instruction Extractor",
             )
-            if field.value is None or field.confidence < confidence_threshold:
+            if (
+                field.value is None
+                or field.confidence < confidence_threshold
+                or attribute in result.flagged_fields
+            ):
                 cell.fill = LOW_CONFIDENCE_FILL
 
         review_cell = worksheet.cell(
             row=row,
-            column=last_column,
+            column=last_column - 1,
             value="Yes" if result.manual_review_required else "No",
+        )
+        text_cell(
+            worksheet, row, last_column, result.processing_error or "; ".join(result.warnings) or None
         )
         if result.manual_review_required:
             review_cell.fill = REVIEW_REQUIRED_FILL
@@ -78,9 +103,10 @@ def create_extraction_workbook(
     worksheet.add_table(table)
     worksheet.freeze_panes = "B6"
     worksheet.column_dimensions["A"].width = 48
-    for column in range(2, last_column):
+    for column in range(2, last_column - 1):
         worksheet.column_dimensions[worksheet.cell(row=5, column=column).column_letter].width = 24
-    worksheet.column_dimensions[worksheet.cell(row=5, column=last_column).column_letter].width = 24
+    worksheet.column_dimensions[worksheet.cell(row=5, column=last_column - 1).column_letter].width = 24
+    worksheet.column_dimensions[worksheet.cell(row=5, column=last_column).column_letter].width = 48
 
     output = BytesIO()
     workbook.save(output)

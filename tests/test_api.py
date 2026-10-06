@@ -152,7 +152,7 @@ def test_extract_zip_returns_a_result_for_each_archive_member() -> None:
     worksheet = result_sheet(response.content)
     assert [worksheet.cell(row=row, column=1).value for row in (6, 7)] == [
         "https://storage.example/wires/batch.zip#first.pdf",
-        "https://storage.example/wires/batch.zip#second.png",
+        "https://storage.example/wires/batch.zip#nested/second.png",
     ]
     assert [call["filename"] for call in service.calls] == ["first.pdf", "second.png"]
 

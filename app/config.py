@@ -23,10 +23,23 @@ class Settings(BaseSettings):
     max_upload_bytes: int = Field(default=20 * 1024 * 1024, gt=0)
     max_archive_files: int = Field(default=100, gt=0)
     max_archive_uncompressed_bytes: int = Field(default=100 * 1024 * 1024, gt=0)
+    max_pdf_pages: int = Field(default=25, gt=0)
+    max_concurrent_extractions: int = Field(default=8, gt=0)
+    request_timeout_seconds: float = Field(default=90, gt=0)
+    # Azure Functions HTTP triggers are cut off at ~230 s; return the workbook before that.
+    request_deadline_seconds: float = Field(default=200, gt=0)
+    # Independent model reads per document; fields that disagree between reads are flagged.
+    extraction_passes: int = Field(default=2, ge=1, le=3)
     log_model_responses: bool = False
 
     @model_validator(mode="after")
     def normalize_endpoint(self) -> "Settings":
+        if "YOUR-RESOURCE" in self.azure_ai_foundry_base_url.upper():
+            raise ValueError(
+                "AZURE_AI_FOUNDRY_BASE_URL is still the .env.example placeholder; set your real endpoint"
+            )
+        if self.azure_ai_foundry_api_key.get_secret_value().strip() in {"", "replace-with-your-key"}:
+            raise ValueError("AZURE_AI_FOUNDRY_API_KEY is empty or still the .env.example placeholder")
         parsed = urlparse(self.azure_ai_foundry_base_url)
         path = parsed.path.rstrip("/")
 

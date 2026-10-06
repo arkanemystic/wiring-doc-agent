@@ -37,3 +37,18 @@ class ExtractionResponse(BaseModel):
     document_source: str
     manual_review_required: bool
     fields: WireInstructionFields
+    processing_error: str | None = None
+    warnings: list[str] = Field(default_factory=list)
+    flagged_fields: list[str] = Field(default_factory=list)
+
+    @classmethod
+    def failed(cls, document_source: str, error: str) -> "ExtractionResponse":
+        empty = ExtractedField(value=None, confidence=0, page=None)
+        return cls(
+            document_source=document_source,
+            manual_review_required=True,
+            fields=WireInstructionFields(
+                **{name: empty for name in WireInstructionFields.model_fields}
+            ),
+            processing_error=error,
+        )
