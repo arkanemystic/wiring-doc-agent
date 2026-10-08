@@ -6,6 +6,7 @@ and which extraction setup is safe enough to credit with those savings. No Azure
 ```bash
 python -m evals.roi.replay 100   # ~8 min: 3 configs x 100 packages through the real /extract endpoint
 python -m evals.roi.roi          # writes REPORT.md, roi.json, roi.html (client one-pager)
+python -m evals.roi.charts       # writes dashboard.html: cost, accuracy, safety, speed and value charts per config
 ```
 
 ## Design
@@ -22,6 +23,12 @@ wired into the service yet; replaying their reads through it shows what the work
 
 A config is recommended only if it left **no wrong value unflagged** and no failed rows. Wrong account or ABA
 numbers are not costed in dollars: they are a stop condition, not a saving.
+
+## Prices
+
+Model prices come from the Azure Retail Prices API (East US 2, Global Standard, 2026-10-08): gpt-6-luna $0.10 / 1M
+input and $0.50 / 1M output tokens; Mistral Document AI 2512 $3.00 / 1,000 pages. Volume (~100 loans/month and growing)
+comes from the Treasury use-case diagram.
 
 ## Replacing assumptions
 

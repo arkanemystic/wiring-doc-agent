@@ -6,11 +6,31 @@
   },
   "tasks": {
     "_source": "ASSUMED split of the 240 min across the Phase 1 scope in the Initial Funding design doc (section 15). Not measured.",
-    "intake":         {"label": "Intake: pull request email + attachments, build package folder",          "minutes": 20, "phase1_residual": 0.10},
-    "wire_extraction":{"label": "Wire extraction: key beneficiary, bank, ABA, account, addresses",        "minutes": 40, "phase1_residual": null},
-    "cross_doc":      {"label": "Cross-document validation: ISS vs email vs wire (amounts, fees, fund, dates)", "minutes": 80, "phase1_residual": 0.25},
-    "exceptions":     {"label": "Exceptions: identify, document, call-back on masked/conflicting values", "minutes": 40, "phase1_residual": 0.60},
-    "outputs":        {"label": "Outputs: IF triage workbook, BOA CashPro CSV, BCMP wet-funding values",  "minutes": 60, "phase1_residual": 0.15}
+    "intake": {
+      "label": "Intake: pull request email + attachments, build package folder",
+      "minutes": 20,
+      "phase1_residual": 0.1
+    },
+    "wire_extraction": {
+      "label": "Wire extraction: key beneficiary, bank, ABA, account, addresses",
+      "minutes": 40,
+      "phase1_residual": null
+    },
+    "cross_doc": {
+      "label": "Cross-document validation: ISS vs email vs wire (amounts, fees, fund, dates)",
+      "minutes": 80,
+      "phase1_residual": 0.25
+    },
+    "exceptions": {
+      "label": "Exceptions: identify, document, call-back on masked/conflicting values",
+      "minutes": 40,
+      "phase1_residual": 0.6
+    },
+    "outputs": {
+      "label": "Outputs: IF triage workbook, BOA CashPro CSV, BCMP wet-funding values",
+      "minutes": 60,
+      "phase1_residual": 0.15
+    }
   },
   "_phase1_residual": "ASSUMED share of each task's minutes still done by a person once that task is automated (review, approvals, calls). wire_extraction is null because it is measured: its residual is the review time below.",
   "review": {
@@ -21,15 +41,42 @@
   },
   "volume_packages_per_month": {
     "value": 100,
-    "source": "ASSUMED. Treasury doc: 200-300 h/month at 2-3 h per loan, i.e. ~100 loans/month; each loan is funded once."
+    "growth_per_month": 0.03,
+    "source": "Treasury use-case diagram: 'Monthly volume is ~100 loans and growing'; each loan has one initial funding package. 3%/month growth is ASSUMED."
   },
-  "loaded_cost_per_hour_usd": {"value": 55, "source": "ASSUMED fully loaded Accounting staff cost."},
-  "working_hours_per_fte_year": {"value": 1800, "source": "Standard planning figure."},
+  "loaded_cost_per_hour_usd": {
+    "value": 55,
+    "source": "ASSUMED fully loaded Accounting staff cost."
+  },
+  "working_hours_per_fte_year": {
+    "value": 1800,
+    "source": "Standard planning figure."
+  },
   "run_cost": {
-    "_source": "PLACEHOLDER prices; replace with the Azure price sheet for the deployed models. Token counts are measured (evals/gpt-6-luna/results.json).",
-    "gpt-6-luna": {"usd_per_m_input_tokens": 1.25, "usd_per_m_output_tokens": 10.0, "input_tokens_per_read": 2082, "output_tokens_per_read": 422, "reads_per_doc": 2},
-    "mistral-document-ai-2512-image-only": {"usd_per_1000_pages": 3.0, "reads_per_doc": 2},
-    "mistral-ocr+gpt-6-luna": {"usd_per_1000_pages": 3.0, "usd_per_m_input_tokens": 1.25, "usd_per_m_output_tokens": 10.0, "input_tokens_per_read": 1200, "output_tokens_per_read": 422, "reads_per_doc": 1},
-    "hosting_usd_per_month": 150
+    "_source": "Azure Retail Prices API (prices.azure.com), eastus2, Global Standard, pulled 2026-10-08: gpt-6-luna short context $0.10 / 1M input, $0.50 / 1M output tokens; Mistral Document AI 2512 $3.00 / 1,000 pages (Data Zone: $0.11 / $0.55 and $3.30). Tokens for image reads are measured (evals/gpt-6-luna/results.json); luna-on-OCR-text input is ESTIMATED from prompt + schema + page text length.",
+    "gpt-6-luna": {
+      "usd_per_m_input_tokens": 0.1,
+      "usd_per_m_output_tokens": 0.5,
+      "input_tokens_per_read": 2082,
+      "output_tokens_per_read": 422,
+      "reads_per_doc": 2,
+      "calls": "2 x gpt-6-luna vision read"
+    },
+    "mistral-document-ai-2512-image-only": {
+      "usd_per_1000_pages": 3.0,
+      "reads_per_doc": 2,
+      "calls": "2 x Mistral Document AI annotation"
+    },
+    "mistral-ocr+gpt-6-luna": {
+      "usd_per_1000_pages": 3.0,
+      "usd_per_m_input_tokens": 0.1,
+      "usd_per_m_output_tokens": 0.5,
+      "input_tokens_per_read": 1200,
+      "output_tokens_per_read": 422,
+      "reads_per_doc": 1,
+      "calls": "1 x Mistral Document AI + 1 x gpt-6-luna on OCR text"
+    },
+    "hosting_usd_per_month": 150,
+    "_hosting": "ASSUMED: Azure Functions + Storage + Application Insights for ~100-300 packages/month."
   }
 }

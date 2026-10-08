@@ -62,7 +62,7 @@
      ]
     ]
    },
-   "run_cost_per_package_usd": 0.013645,
+   "run_cost_per_package_usd": 0.0008384000000000001,
    "scenarios": {
     "Manual today": {
      "tasks": {
@@ -78,8 +78,8 @@
      "hours_per_year": 0.0,
      "fte": 0.0,
      "gross_usd": 0.0,
-     "run_usd": 1816.374,
-     "net_usd": -1816.374
+     "run_usd": 1801.00608,
+     "net_usd": -1801.00608
     },
     "Current build (wire extraction live)": {
      "tasks": {
@@ -95,8 +95,8 @@
      "hours_per_year": 649.2000000000002,
      "fte": 0.36066666666666675,
      "gross_usd": 35706.00000000001,
-     "run_usd": 1816.374,
-     "net_usd": 33889.626000000004
+     "run_usd": 1801.00608,
+     "net_usd": 33904.99392000001
     },
     "Phase 1 complete (projected)": {
      "tasks": {
@@ -112,8 +112,8 @@
      "hours_per_year": 3549.2000000000007,
      "fte": 1.971777777777778,
      "gross_usd": 195206.00000000003,
-     "run_usd": 1816.374,
-     "net_usd": 193389.62600000002
+     "run_usd": 1801.00608,
+     "net_usd": 193404.99392000004
     }
    }
   },
@@ -228,7 +228,7 @@
     "pages_per_doc": 1.16,
     "silent_examples": []
    },
-   "run_cost_per_package_usd": 0.0092,
+   "run_cost_per_package_usd": 0.0038109999999999997,
    "scenarios": {
     "Manual today": {
      "tasks": {
@@ -244,8 +244,8 @@
      "hours_per_year": 0.0,
      "fte": 0.0,
      "gross_usd": 0.0,
-     "run_usd": 1811.04,
-     "net_usd": -1811.04
+     "run_usd": 1804.5732,
+     "net_usd": -1804.5732
     },
     "Current build (wire extraction live)": {
      "tasks": {
@@ -261,8 +261,8 @@
      "hours_per_year": 664.8000000000002,
      "fte": 0.36933333333333346,
      "gross_usd": 36564.00000000001,
-     "run_usd": 1811.04,
-     "net_usd": 34752.96000000001
+     "run_usd": 1804.5732,
+     "net_usd": 34759.42680000001
     },
     "Phase 1 complete (projected)": {
      "tasks": {
@@ -278,8 +278,8 @@
      "hours_per_year": 3564.8,
      "fte": 1.9804444444444445,
      "gross_usd": 196064.0,
-     "run_usd": 1811.04,
-     "net_usd": 194252.96
+     "run_usd": 1804.5732,
+     "net_usd": 194259.4268
     }
    }
   }
@@ -290,64 +290,64 @@
    "hours_per_year": 2057.4,
    "fte": 1.143,
    "gross_usd": 113157.0,
-   "run_usd": 1805.52,
-   "net_usd": 111351.48
+   "run_usd": 1802.2866,
+   "net_usd": 111354.7134
   },
   "50|1.0": {
    "hours_per_year": 1782.4,
    "fte": 0.9902222222222222,
    "gross_usd": 98032.0,
-   "run_usd": 1805.52,
-   "net_usd": 96226.48
+   "run_usd": 1802.2866,
+   "net_usd": 96229.7134
   },
   "50|1.5": {
    "hours_per_year": 1507.3999999999999,
    "fte": 0.8374444444444443,
    "gross_usd": 82906.99999999999,
-   "run_usd": 1805.52,
-   "net_usd": 81101.47999999998
+   "run_usd": 1802.2866,
+   "net_usd": 81104.71339999998
   },
   "100|0.5": {
    "hours_per_year": 4114.8,
    "fte": 2.286,
    "gross_usd": 226314.0,
-   "run_usd": 1811.04,
-   "net_usd": 224502.96
+   "run_usd": 1804.5732,
+   "net_usd": 224509.4268
   },
   "100|1.0": {
    "hours_per_year": 3564.8,
    "fte": 1.9804444444444445,
    "gross_usd": 196064.0,
-   "run_usd": 1811.04,
-   "net_usd": 194252.96
+   "run_usd": 1804.5732,
+   "net_usd": 194259.4268
   },
   "100|1.5": {
    "hours_per_year": 3014.7999999999997,
    "fte": 1.6748888888888886,
    "gross_usd": 165813.99999999997,
-   "run_usd": 1811.04,
-   "net_usd": 164002.95999999996
+   "run_usd": 1804.5732,
+   "net_usd": 164009.42679999996
   },
   "200|0.5": {
    "hours_per_year": 8229.6,
    "fte": 4.572,
    "gross_usd": 452628.0,
-   "run_usd": 1822.08,
-   "net_usd": 450805.92
+   "run_usd": 1809.1464,
+   "net_usd": 450818.8536
   },
   "200|1.0": {
    "hours_per_year": 7129.6,
    "fte": 3.960888888888889,
    "gross_usd": 392128.0,
-   "run_usd": 1822.08,
-   "net_usd": 390305.92
+   "run_usd": 1809.1464,
+   "net_usd": 390318.8536
   },
   "200|1.5": {
    "hours_per_year": 6029.599999999999,
    "fte": 3.3497777777777773,
    "gross_usd": 331627.99999999994,
-   "run_usd": 1822.08,
-   "net_usd": 329805.9199999999
+   "run_usd": 1809.1464,
+   "net_usd": 329818.8535999999
   }
  }
 }
