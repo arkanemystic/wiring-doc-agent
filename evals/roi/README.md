@@ -7,7 +7,7 @@ and which extraction setup is safe enough to credit with those savings. No Azure
 python -m evals.roi.replay 100   # ~8 min: 3 configs x 100 packages through the real /extract endpoint
 python -m evals.roi.roi          # writes REPORT.md, roi.json, roi.html (client one-pager)
 python -m evals.roi.charts       # writes dashboard.html: cost, accuracy, safety, speed and value charts per config
-python -m evals.roi.client_report 
+python -m evals.roi.client_report  # writes Phase1_Benefits.pdf, the client-facing summary
 ```
 
 ## Design
