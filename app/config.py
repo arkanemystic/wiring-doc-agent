@@ -51,6 +51,11 @@ class Settings(BaseSettings):
                 parsed._replace(path=f"{path.removesuffix('/responses')}/", query="")
             )
             self.azure_ai_foundry_api_version = api_version
+        elif path.endswith("/openai/v1/responses"):
+            # The v1 Responses URL copied from the portal; the SDK appends /responses itself.
+            self.azure_ai_foundry_base_url = urlunparse(
+                parsed._replace(path=f"{path.removesuffix('responses')}", query="")
+            )
         elif path == "":
             self.azure_ai_foundry_base_url = f"{self.azure_ai_foundry_base_url.rstrip('/')}/openai/v1/"
         else:
