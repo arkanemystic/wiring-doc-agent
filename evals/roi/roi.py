@@ -37,6 +37,10 @@ def measure(run: dict) -> dict:
         "false_alarms": sum(c[2]["flagged"] for c in cells if c[2]["correct"]),
         "flagged_per_row": sum(c[2]["flagged"] for c in cells) / max(len(ok), 1),
         "pages_per_doc": sum(2 if r["doc"] == "two_page" else 1 for r in rows) / len(rows),
+        "field_correct": {f: sum(r["fields"][f]["correct"] for r in ok) for f in FIELDS},
+        "packages_fully_right": sum(all(r["fields"][f]["correct"] for f in FIELDS) for r in ok),
+        **{k: run[k] for k in ("live", "concurrency", "median_package_seconds", "p90_package_seconds", "median_ocr_seconds",
+                                "median_luna_seconds", "luna_input_tokens_per_read", "luna_output_tokens_per_read") if k in run},
         "silent_examples": sorted({(c[0]["doc"], c[1], c[2]["value"]) for c in silent})[:8],
     }
 
@@ -79,7 +83,8 @@ def build() -> dict:
     out = {"generated": data["generated"], "configs": {}}
     for run in data["runs"]:
         m = measure(run)
-        cost = run_cost_per_doc(run["config"], m, a)
+        # A live run measured its own tokens and pages; replayed runs are priced from assumptions.json.
+        cost = run["cost_per_package_usd"] if "cost_per_package_usd" in run else run_cost_per_doc(run["config"], m, a)
         sc = scenarios(m, a)
         base = sum(sc["Manual today"].values())
         res = {"measured": m, "run_cost_per_package_usd": cost, "scenarios": {}}
@@ -89,7 +94,9 @@ def build() -> dict:
                                       "saved_pct": (base - total) / base, **economics(base - total, cost, a)}
         out["configs"][run["config"]] = res
     safe = [c for c, r in out["configs"].items() if r["measured"]["wrong_silent"] == 0 and r["measured"]["failed_rows"] == 0]
-    best = min(safe or out["configs"], key=lambda c: out["configs"][c]["scenarios"]["Phase 1 complete (projected)"]["minutes"])
+    # A live run of the production setup outranks replays of recorded reads when it is safe.
+    live = [c for c in safe if any(r["config"] == c and r.get("live") for r in data["runs"])]
+    best = live[0] if live else min(safe or out["configs"], key=lambda c: out["configs"][c]["scenarios"]["Phase 1 complete (projected)"]["minutes"])
     out["recommended"] = best
     m, cost = out["configs"][best]["measured"], out["configs"][best]["run_cost_per_package_usd"]
     grid = {}

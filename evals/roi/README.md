@@ -4,11 +4,17 @@ Shows what Phase 1 automation saves against the client's baseline of **~4 person
 and which extraction setup is safe enough to credit with those savings. No Azure credentials needed.
 
 ```bash
+python -m evals.roi.live 100     # LIVE: the combined unit (Mistral OCR -> gpt-6-luna) on 100 distinct packages; needs credentials
 python -m evals.roi.replay 100   # ~8 min: 3 configs x 100 packages through the real /extract endpoint
 python -m evals.roi.roi          # writes REPORT.md, roi.json, roi.html (client one-pager)
 python -m evals.roi.charts       # writes dashboard.html: cost, accuracy, safety, speed and value charts per config
 python -m evals.roi.client_report  # writes Phase1_Benefits.pdf, the client-facing summary
 ```
+
+`live.py` needs `AZURE_AI_FOUNDRY_BASE_URL` / `AZURE_AI_FOUNDRY_API_KEY` (gpt-6-luna) and `MISTRAL_OCR_URL`
+(plus `MISTRAL_OCR_API_KEY` if it differs). It posts each package on its own to `/extract` with `OCR_PROVIDER=mistral`,
+4 at a time (`--concurrency`; the default Mistral quota is 50 requests a minute), and adds its run to `results.json`.
+`roi.py` prefers a safe live run over the replays, and `client_report.py` refuses to build without one.
 
 ## Design
 

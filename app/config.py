@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Literal
 from urllib.parse import parse_qs, urlparse, urlunparse
 
 from pydantic import Field, SecretStr, model_validator
@@ -31,6 +32,13 @@ class Settings(BaseSettings):
     # Independent model reads per document; fields that disagree between reads are flagged.
     extraction_passes: int = Field(default=2, ge=1, le=3)
     log_model_responses: bool = False
+    # "mistral": Mistral Document AI reads the pages (OCR only) and the deployment above extracts the fields
+    # from that text. "none": the deployment reads rendered page images itself.
+    ocr_provider: Literal["none", "mistral"] = "none"
+    # The .../providers/mistral/azure/ocr endpoint. The key defaults to AZURE_AI_FOUNDRY_API_KEY.
+    mistral_ocr_url: str | None = None
+    mistral_ocr_api_key: SecretStr | None = None
+    mistral_ocr_model: str = "mistral-document-ai-2512"
 
     @model_validator(mode="after")
     def normalize_endpoint(self) -> "Settings":
@@ -40,6 +48,8 @@ class Settings(BaseSettings):
             )
         if self.azure_ai_foundry_api_key.get_secret_value().strip() in {"", "replace-with-your-key"}:
             raise ValueError("AZURE_AI_FOUNDRY_API_KEY is empty or still the .env.example placeholder")
+        if self.ocr_provider == "mistral" and not self.mistral_ocr_url:
+            raise ValueError("OCR_PROVIDER=mistral needs MISTRAL_OCR_URL (the .../providers/mistral/azure/ocr endpoint)")
         parsed = urlparse(self.azure_ai_foundry_base_url)
         path = parsed.path.rstrip("/")
 

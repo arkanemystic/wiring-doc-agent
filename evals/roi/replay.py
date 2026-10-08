@@ -23,10 +23,6 @@ from fastapi.testclient import TestClient
 from openai import APITimeoutError
 from openpyxl import load_workbook
 
-# The app validates settings at startup; replay never reaches the network, so placeholders suffice.
-os.environ.setdefault("AZURE_AI_FOUNDRY_BASE_URL", "https://replay.openai.azure.com/")
-os.environ.setdefault("AZURE_AI_FOUNDRY_API_KEY", "replay")
-
 from app.config import Settings, get_settings
 from app.main import app, get_extraction_service
 from app.service import WireExtractionService, page_images
@@ -103,17 +99,19 @@ class ReplayResponses:
         return type("R", (), {"output_text": json.dumps(outputs[i])})()
 
 
-def score_workbook(content: bytes) -> list[dict]:
+def score_workbook(content: bytes, truths: dict[str, dict] | None = None) -> list[dict]:
+    """Score every row against ground truth: the harness DOCS by layout, or `truths` keyed by document source."""
     sheet = load_workbook(BytesIO(content))["Results"]
     headers = [c.value for c in sheet[5]]
     rows = []
     for row in sheet.iter_rows(min_row=6):
         source = row[0].value
         doc = next(d for d in DOCS if source.endswith(f"_{d}.pdf"))
+        truth = truths[source] if truths else DOCS[doc]
         notes = row[headers.index("Notes")].value or ""
         fields = {}
         for f, cell in zip(FIELDS, row[1:1 + len(FIELDS)]):
-            fields[f] = {"value": cell.value, "correct": norm(cell.value) == norm(DOCS[doc][f]),
+            fields[f] = {"value": cell.value, "correct": norm(cell.value) == norm(truth[f]),
                          "flagged": cell.fill.fgColor.rgb.endswith(FLAG_COLOR)}
         rows.append({"source": source, "doc": doc, "review": row[headers.index("Manual Review Required")].value == "Yes",
                      # Failed rows (deadline, provider error) come back with every field empty and the reason in Notes.
@@ -123,6 +121,9 @@ def score_workbook(content: bytes) -> list[dict]:
 
 
 def run_config(name: str, packages: int, seed: int) -> dict:
+    # The app validates settings at startup; replay never reaches the network, so placeholders suffice.
+    os.environ.setdefault("AZURE_AI_FOUNDRY_BASE_URL", "https://replay.openai.azure.com/")
+    os.environ.setdefault("AZURE_AI_FOUNDRY_API_KEY", "replay")
     path, mode, flat = CONFIGS[name]
     pdfs = {d: make_doc(d, t) for d, t in DOCS.items()}
     if flat:

@@ -19,6 +19,16 @@
     "false_alarms": 52,
     "flagged_per_row": 1.77,
     "pages_per_doc": 1.16,
+    "field_correct": {
+     "beneficiary_name": 89,
+     "beneficiary_address": 61,
+     "bank_name": 100,
+     "bank_address": 83,
+     "routing_number_aba": 16,
+     "account_number": 33
+    },
+    "packages_fully_right": 16,
+    "concurrency": 8,
     "silent_examples": [
      [
       "dense_table",
@@ -135,6 +145,16 @@
     "false_alarms": 83,
     "flagged_per_row": 0.83,
     "pages_per_doc": 1.16,
+    "field_correct": {
+     "beneficiary_name": 50,
+     "beneficiary_address": 100,
+     "bank_name": 100,
+     "bank_address": 100,
+     "routing_number_aba": 100,
+     "account_number": 100
+    },
+    "packages_fully_right": 50,
+    "concurrency": 8,
     "silent_examples": [
      [
       "baseline",
@@ -226,6 +246,16 @@
     "false_alarms": 96,
     "flagged_per_row": 1.38,
     "pages_per_doc": 1.16,
+    "field_correct": {
+     "beneficiary_name": 58,
+     "beneficiary_address": 100,
+     "bank_name": 100,
+     "bank_address": 100,
+     "routing_number_aba": 100,
+     "account_number": 100
+    },
+    "packages_fully_right": 58,
+    "concurrency": 8,
     "silent_examples": []
    },
    "run_cost_per_package_usd": 0.0038109999999999997,

@@ -1,9 +1,13 @@
 import base64
+import html
 import json
 import logging
 import mimetypes
+import re
+import time
 from typing import Any
 
+import httpx
 import pymupdf
 from openai import OpenAI
 from pydantic import ValidationError
@@ -19,6 +23,10 @@ PAGE_RENDER_SCALE = 2
 
 class InvalidDocumentError(ValueError):
     """The uploaded document itself is unusable (corrupt, encrypted, too long, unsupported)."""
+
+
+class OcrError(ValueError):
+    """The OCR service failed or returned something unusable."""
 
 
 # PDFs and TIFFs are rendered to PNG pages; the rest are image types the Responses API accepts.
@@ -46,21 +54,33 @@ def detect_mime_type(content: bytes, filename: str, declared: str | None) -> str
     return mimetypes.guess_type(filename)[0] or declared or "application/octet-stream"
 
 
+def open_pages(content: bytes, filetype: str = "pdf", max_pages: int | None = None) -> pymupdf.Document:
+    """Open a PDF or multi-page TIFF, rejecting encrypted, empty, corrupt or over-long files."""
+    label = "PDF" if filetype == "pdf" else "TIFF"
+    try:
+        document = pymupdf.open(stream=content, filetype=filetype)
+    except (pymupdf.FileDataError, RuntimeError) as error:
+        raise InvalidDocumentError(f"The uploaded {label} could not be rendered.") from error
+    if document.needs_pass or document.is_encrypted:
+        document.close()
+        raise InvalidDocumentError(f"The uploaded {label} is password-protected.")
+    if document.page_count == 0:
+        document.close()
+        raise InvalidDocumentError(f"The uploaded {label} has no pages.")
+    if max_pages and document.page_count > max_pages:
+        count = document.page_count
+        document.close()
+        raise InvalidDocumentError(f"The uploaded {label} has {count} pages; the limit is {max_pages}.")
+    return document
+
+
 def page_images(
     content: bytes, filetype: str = "pdf", max_pages: int | None = None
 ) -> list[dict[str, str]]:
     """Render each page of a PDF or multi-page TIFF without extracting or interpreting its text."""
     label = "PDF" if filetype == "pdf" else "TIFF"
-    try:
-        with pymupdf.open(stream=content, filetype=filetype) as document:
-            if document.needs_pass or document.is_encrypted:
-                raise InvalidDocumentError(f"The uploaded {label} is password-protected.")
-            if document.page_count == 0:
-                raise InvalidDocumentError(f"The uploaded {label} has no pages.")
-            if max_pages and document.page_count > max_pages:
-                raise InvalidDocumentError(
-                    f"The uploaded {label} has {document.page_count} pages; the limit is {max_pages}."
-                )
+    with open_pages(content, filetype, max_pages) as document:
+        try:
             return [
                 {
                     "type": "input_image",
@@ -72,10 +92,8 @@ def page_images(
                 }
                 for page in document
             ]
-    except InvalidDocumentError:
-        raise
-    except (pymupdf.FileDataError, RuntimeError) as error:
-        raise InvalidDocumentError(f"The uploaded {label} could not be rendered.") from error
+        except (pymupdf.FileDataError, RuntimeError) as error:
+            raise InvalidDocumentError(f"The uploaded {label} could not be rendered.") from error
 
 
 def pdf_page_images(content: bytes, max_pages: int | None = None) -> list[dict[str, str]]:
@@ -102,6 +120,61 @@ def disagreeing_fields(passes: list[ModelExtraction]) -> list[str]:
         for name in ModelExtraction.model_fields
         if len({normalize_for_comparison(getattr(p, name).value) for p in passes}) > 1
     ]
+
+
+def compact(value: str) -> str:
+    """Letters and digits only, lower case: tolerant of OCR line breaks, punctuation and markup."""
+    return re.sub(r"[^0-9a-z]", "", html.unescape(value).casefold())
+
+
+def fields_missing_from_text(fields: ModelExtraction, text: str) -> list[str]:
+    """Fields whose value does not occur in the OCR text, so the model must have changed or invented it."""
+    haystack = compact(text)
+    return [
+        name
+        for name in ModelExtraction.model_fields
+        if (value := getattr(fields, name).value) and compact(value) not in haystack
+    ]
+
+
+class MistralOcr:
+    """Mistral Document AI on Azure, used for OCR only: returns each page's text as markdown."""
+
+    def __init__(self, settings: Settings, client: httpx.Client | None = None) -> None:
+        key = settings.mistral_ocr_api_key
+        if key is None or not key.get_secret_value().strip():  # blank in .env means "same key as Foundry"
+            key = settings.azure_ai_foundry_api_key
+        self._url = (settings.mistral_ocr_url or "").rstrip("/")
+        self._model = settings.mistral_ocr_model
+        self._headers = {"Authorization": f"Bearer {key.get_secret_value()}"}
+        self._client = client or httpx.Client(timeout=settings.request_timeout_seconds)
+
+    def pages(self, content: bytes, mime_type: str, timeout: float | None = None) -> list[str]:
+        data = base64.b64encode(content).decode("ascii")
+        if mime_type == "application/pdf":
+            document = {"type": "document_url", "document_url": f"data:application/pdf;base64,{data}"}
+        else:
+            document = {"type": "image_url", "image_url": f"data:{mime_type};base64,{data}"}
+        body = {"model": self._model, "document": document, "include_image_base64": False}
+        for attempt in range(3):
+            try:
+                response = self._client.post(self._url, headers=self._headers, json=body,
+                                             **({"timeout": timeout} if timeout is not None else {}))
+            except httpx.TimeoutException as error:
+                raise OcrError("The OCR service did not respond in time.") from error
+            except httpx.HTTPError as error:
+                raise OcrError("The OCR service could not be reached.") from error
+            if response.status_code != 429 or attempt == 2:
+                break
+            # The default Mistral quota is small (50 requests / 60 s); wait as asked, briefly.
+            time.sleep(min(float(response.headers.get("retry-after", 5)), 10))
+        if response.status_code >= 400:
+            raise OcrError(f"The OCR service returned HTTP {response.status_code}.")
+        try:
+            pages = sorted(response.json()["pages"], key=lambda page: page["index"])
+            return [html.unescape(page["markdown"]) for page in pages]
+        except (ValueError, KeyError, TypeError) as error:
+            raise OcrError("The OCR service returned an unreadable response.") from error
 
 
 def strict_json_schema(schema: Any) -> Any:
@@ -132,6 +205,9 @@ Use null for value and page if the field is not found. Null fields get confidenc
 GENERAL RULES
 - Copy values exactly as written. Do not correct, reformat, or guess.
 - Account number: copy exactly as written, including dashes and leading zeros.
+- Beneficiary name: the account name or title as labeled (for example "Account Name" or
+  "Beneficiary Account Name"), including escrow, trust, IOLTA or similar wording that is part of it.
+  Use the company name only when no account name is given.
 - Never invent data. If you are unsure, return null.
 - The only exception to "do not infer" is the beneficiary address fallback below.
 
@@ -174,8 +250,9 @@ Wrong output: using "400 Commerce Plaza, Dayton, OH 45402" as the beneficiary ad
 
 
 class WireExtractionService:
-    def __init__(self, settings: Settings, client: OpenAI | None = None) -> None:
+    def __init__(self, settings: Settings, client: OpenAI | None = None, ocr: MistralOcr | None = None) -> None:
         self._settings = settings
+        self._ocr = ocr or (MistralOcr(settings) if settings.ocr_provider == "mistral" else None)
         if client:
             self._client = client
             return
@@ -208,7 +285,23 @@ class WireExtractionService:
                 f"Unsupported document type '{mime_type}' for '{filename}'. "
                 "Upload a PDF, TIFF, PNG, JPEG, GIF, or WebP file."
             )
-        if mime_type in RENDERED_MIME_TYPES:
+        ocr_text: str | None = None
+        if self._ocr is not None:
+            if mime_type in RENDERED_MIME_TYPES:
+                with open_pages(content, "pdf" if mime_type == "application/pdf" else "tiff",
+                                self._settings.max_pdf_pages) as document:
+                    if mime_type == "image/tiff":  # Mistral takes PDFs and web images, not TIFF
+                        content, mime_type = document.convert_to_pdf(), "application/pdf"
+            started = time.monotonic()
+            pages = self._ocr.pages(content, mime_type, timeout)
+            if timeout is not None:
+                timeout = max(timeout - (time.monotonic() - started), 1)
+            ocr_text = "\n\n".join(f"--- Page {number} ---\n{text}" for number, text in enumerate(pages, start=1))
+            document_parts = [{"type": "input_text", "text": f"OCR text of the document, page by page:\n\n{ocr_text}"}]
+            extraction_instruction = (
+                "The text above is the OCR output of the document. Extract the wire-instruction fields from it."
+            )
+        elif mime_type in RENDERED_MIME_TYPES:
             document_parts = page_images(
                 content,
                 "pdf" if mime_type == "application/pdf" else "tiff",
@@ -248,6 +341,13 @@ class WireExtractionService:
             if name not in flagged:
                 flagged.append(name)
             needs_review = True
+        if ocr_text is not None:
+            for name in fields_missing_from_text(fields, ocr_text):
+                # The model rewrote, merged or invented a value instead of copying it from the page.
+                warnings.append(f"{name} '{getattr(fields, name).value}' does not appear in the OCR text; verify it.")
+                if name not in flagged:
+                    flagged.append(name)
+                needs_review = True
         return ExtractionResponse(
             document_source=document_source,
             manual_review_required=needs_review,

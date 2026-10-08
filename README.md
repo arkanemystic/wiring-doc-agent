@@ -77,6 +77,10 @@ Supported documents are PDF, TIFF, PNG, JPEG, GIF, and WebP; other types (includ
 | `REQUEST_DEADLINE_SECONDS` | Overall budget for one `/extract` request. ZIP members not finished in time become "Not processed" rows; a single document gets HTTP 504. Keep it below the Azure Functions HTTP limit (~230 s). | `200` |
 | `EXTRACTION_PASSES` | Independent model reads per document (1-3). With 2 or more, any field whose reads disagree is highlighted and noted. Multiplies cost and latency; set `1` only for cheap experiments. | `2` |
 | `LOG_MODEL_RESPONSES` | Write raw LLM responses to the server console. Enable only for local debugging because responses contain banking data. | `false` |
+| `OCR_PROVIDER` | `mistral`: Mistral Document AI reads the pages (OCR only) and the deployment above extracts the fields from that text; values that do not appear in the OCR text are flagged. `none`: the deployment reads rendered page images. | `none` |
+| `MISTRAL_OCR_URL` | Mistral Document AI OCR endpoint (`https://<resource>.services.ai.azure.com/providers/mistral/azure/ocr`). Required when `OCR_PROVIDER=mistral`. | None |
+| `MISTRAL_OCR_API_KEY` | Key for the OCR endpoint | `AZURE_AI_FOUNDRY_API_KEY` |
+| `MISTRAL_OCR_MODEL` | Mistral deployment name | `mistral-document-ai-2512` |
 
 The application normalizes Azure endpoints in these forms: resource endpoint (`https://YOUR-RESOURCE.openai.azure.com/`), OpenAI-compatible v1 base URL, or full Foundry Responses endpoint with an `api-version` query parameter.
 
