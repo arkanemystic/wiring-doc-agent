@@ -5,4 +5,5 @@ __pycache__/
 local.settings.json
 *.py[cod]
 
-.python_packagesevals/roi/client_report.html
+.python_packages
+evals/roi/client_report.html
