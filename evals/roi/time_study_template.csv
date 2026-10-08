@@ -1,0 +1,3 @@
+package_id,date,reviewer,mode,intake_min,wire_extraction_min,cross_doc_min,exceptions_min,outputs_min,flagged_fields,errors_found_after_review,notes
+IF-0001,2026-10-15,initials,manual,,,,,,,,
+IF-0001,2026-10-15,initials,assisted,,,,,,,,

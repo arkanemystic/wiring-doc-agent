@@ -1,0 +1,35 @@
+{
+  "_readme": "Every number here that is not measured by replay.py. Replace each with pilot time-study data (see time_study_template.csv), then re-run python -m evals.roi.roi. 'source' says where each value came from.",
+  "baseline_minutes_per_package": {
+    "value": 240,
+    "source": "Client: one person takes ~4 h to do Phase 1 for a funding package."
+  },
+  "tasks": {
+    "_source": "ASSUMED split of the 240 min across the Phase 1 scope in the Initial Funding design doc (section 15). Not measured.",
+    "intake":         {"label": "Intake: pull request email + attachments, build package folder",          "minutes": 20, "phase1_residual": 0.10},
+    "wire_extraction":{"label": "Wire extraction: key beneficiary, bank, ABA, account, addresses",        "minutes": 40, "phase1_residual": null},
+    "cross_doc":      {"label": "Cross-document validation: ISS vs email vs wire (amounts, fees, fund, dates)", "minutes": 80, "phase1_residual": 0.25},
+    "exceptions":     {"label": "Exceptions: identify, document, call-back on masked/conflicting values", "minutes": 40, "phase1_residual": 0.60},
+    "outputs":        {"label": "Outputs: IF triage workbook, BOA CashPro CSV, BCMP wet-funding values",  "minutes": 60, "phase1_residual": 0.15}
+  },
+  "_phase1_residual": "ASSUMED share of each task's minutes still done by a person once that task is automated (review, approvals, calls). wire_extraction is null because it is measured: its residual is the review time below.",
+  "review": {
+    "_source": "ASSUMED reviewer minutes. Every row is checked against the source PDF (retained human control); flagged fields need extra work; failed rows are keyed by hand.",
+    "verify_row_minutes": 4,
+    "fix_flagged_field_minutes": 2,
+    "failed_row_minutes": 40
+  },
+  "volume_packages_per_month": {
+    "value": 100,
+    "source": "ASSUMED. Treasury doc: 200-300 h/month at 2-3 h per loan, i.e. ~100 loans/month; each loan is funded once."
+  },
+  "loaded_cost_per_hour_usd": {"value": 55, "source": "ASSUMED fully loaded Accounting staff cost."},
+  "working_hours_per_fte_year": {"value": 1800, "source": "Standard planning figure."},
+  "run_cost": {
+    "_source": "PLACEHOLDER prices; replace with the Azure price sheet for the deployed models. Token counts are measured (evals/gpt-6-luna/results.json).",
+    "gpt-6-luna": {"usd_per_m_input_tokens": 1.25, "usd_per_m_output_tokens": 10.0, "input_tokens_per_read": 2082, "output_tokens_per_read": 422, "reads_per_doc": 2},
+    "mistral-document-ai-2512-image-only": {"usd_per_1000_pages": 3.0, "reads_per_doc": 2},
+    "mistral-ocr+gpt-6-luna": {"usd_per_1000_pages": 3.0, "usd_per_m_input_tokens": 1.25, "usd_per_m_output_tokens": 10.0, "input_tokens_per_read": 1200, "output_tokens_per_read": 422, "reads_per_doc": 1},
+    "hosting_usd_per_month": 150
+  }
+}

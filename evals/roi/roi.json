@@ -1,0 +1,353 @@
+{
+ "generated": "2026-10-08",
+ "configs": {
+  "gpt-6-luna": {
+   "measured": {
+    "packages": 100,
+    "wall_seconds": 113.0,
+    "machine_seconds_per_package": 1.13,
+    "failed_rows": 0,
+    "rows_marked_review": 100,
+    "fields": 600,
+    "fields_correct": 382,
+    "money_fields_correct": 49,
+    "money_fields": 200,
+    "wrong_caught": 125,
+    "wrong_silent": 93,
+    "silent_money": 42,
+    "packages_with_silent_error": 60,
+    "false_alarms": 52,
+    "flagged_per_row": 1.77,
+    "pages_per_doc": 1.16,
+    "silent_examples": [
+     [
+      "dense_table",
+      "account_number",
+      "330-0090-114"
+     ],
+     [
+      "dense_table",
+      "beneficiary_address",
+      "19 Harbor Point, Suite 120, Baltimore, MD 21231"
+     ],
+     [
+      "long_account",
+      "account_number",
+      "55001178804"
+     ],
+     [
+      "long_account",
+      "beneficiary_address",
+      "410 Granite Ridge Road, Unit B, Boise, ID 83706"
+     ],
+     [
+      "repeated_digits",
+      "account_number",
+      "001100223"
+     ],
+     [
+      "repeated_digits",
+      "bank_address",
+      "110 Asylum Avenue, Hartford, CT 06105"
+     ],
+     [
+      "two_page",
+      "account_number",
+      "881-00-766-1"
+     ],
+     [
+      "two_page",
+      "account_number",
+      "881-00-776-1"
+     ]
+    ]
+   },
+   "run_cost_per_package_usd": 0.013645,
+   "scenarios": {
+    "Manual today": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 40,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 240,
+     "saved_minutes": 0,
+     "saved_pct": 0.0,
+     "hours_per_year": 0.0,
+     "fte": 0.0,
+     "gross_usd": 0.0,
+     "run_usd": 1816.374,
+     "net_usd": -1816.374
+    },
+    "Current build (wire extraction live)": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 7.54,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 207.54,
+     "saved_minutes": 32.46000000000001,
+     "saved_pct": 0.13525000000000004,
+     "hours_per_year": 649.2000000000002,
+     "fte": 0.36066666666666675,
+     "gross_usd": 35706.00000000001,
+     "run_usd": 1816.374,
+     "net_usd": 33889.626000000004
+    },
+    "Phase 1 complete (projected)": {
+     "tasks": {
+      "intake": 2.0,
+      "wire_extraction": 7.54,
+      "cross_doc": 20.0,
+      "exceptions": 24.0,
+      "outputs": 9.0
+     },
+     "minutes": 62.54,
+     "saved_minutes": 177.46,
+     "saved_pct": 0.7394166666666667,
+     "hours_per_year": 3549.2000000000007,
+     "fte": 1.971777777777778,
+     "gross_usd": 195206.00000000003,
+     "run_usd": 1816.374,
+     "net_usd": 193389.62600000002
+    }
+   }
+  },
+  "mistral-document-ai-2512-image-only": {
+   "measured": {
+    "packages": 100,
+    "wall_seconds": 179.2,
+    "machine_seconds_per_package": 1.7919999999999998,
+    "failed_rows": 0,
+    "rows_marked_review": 83,
+    "fields": 600,
+    "fields_correct": 550,
+    "money_fields_correct": 200,
+    "money_fields": 200,
+    "wrong_caught": 0,
+    "wrong_silent": 50,
+    "silent_money": 0,
+    "packages_with_silent_error": 50,
+    "false_alarms": 83,
+    "flagged_per_row": 0.83,
+    "pages_per_doc": 1.16,
+    "silent_examples": [
+     [
+      "baseline",
+      "beneficiary_name",
+      "Brightwater Escrow Services"
+     ],
+     [
+      "blurry_scan",
+      "beneficiary_name",
+      "Brightwater Escrow Services"
+     ],
+     [
+      "repeated_digits",
+      "beneficiary_name",
+      "Hollowell & Gibbs"
+     ]
+    ]
+   },
+   "run_cost_per_package_usd": 0.006959999999999999,
+   "scenarios": {
+    "Manual today": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 40,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 240,
+     "saved_minutes": 0,
+     "saved_pct": 0.0,
+     "hours_per_year": 0.0,
+     "fte": 0.0,
+     "gross_usd": 0.0,
+     "run_usd": 1808.352,
+     "net_usd": -1808.352
+    },
+    "Current build (wire extraction live)": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 5.66,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 205.66,
+     "saved_minutes": 34.34,
+     "saved_pct": 0.14308333333333334,
+     "hours_per_year": 686.8,
+     "fte": 0.38155555555555554,
+     "gross_usd": 37774.0,
+     "run_usd": 1808.352,
+     "net_usd": 35965.648
+    },
+    "Phase 1 complete (projected)": {
+     "tasks": {
+      "intake": 2.0,
+      "wire_extraction": 5.66,
+      "cross_doc": 20.0,
+      "exceptions": 24.0,
+      "outputs": 9.0
+     },
+     "minutes": 60.66,
+     "saved_minutes": 179.34,
+     "saved_pct": 0.74725,
+     "hours_per_year": 3586.7999999999997,
+     "fte": 1.9926666666666666,
+     "gross_usd": 197273.99999999997,
+     "run_usd": 1808.352,
+     "net_usd": 195465.64799999996
+    }
+   }
+  },
+  "mistral-ocr+gpt-6-luna": {
+   "measured": {
+    "packages": 100,
+    "wall_seconds": 147.9,
+    "machine_seconds_per_package": 1.479,
+    "failed_rows": 0,
+    "rows_marked_review": 100,
+    "fields": 600,
+    "fields_correct": 558,
+    "money_fields_correct": 200,
+    "money_fields": 200,
+    "wrong_caught": 42,
+    "wrong_silent": 0,
+    "silent_money": 0,
+    "packages_with_silent_error": 0,
+    "false_alarms": 96,
+    "flagged_per_row": 1.38,
+    "pages_per_doc": 1.16,
+    "silent_examples": []
+   },
+   "run_cost_per_package_usd": 0.0092,
+   "scenarios": {
+    "Manual today": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 40,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 240,
+     "saved_minutes": 0,
+     "saved_pct": 0.0,
+     "hours_per_year": 0.0,
+     "fte": 0.0,
+     "gross_usd": 0.0,
+     "run_usd": 1811.04,
+     "net_usd": -1811.04
+    },
+    "Current build (wire extraction live)": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 6.76,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 206.76,
+     "saved_minutes": 33.24000000000001,
+     "saved_pct": 0.13850000000000004,
+     "hours_per_year": 664.8000000000002,
+     "fte": 0.36933333333333346,
+     "gross_usd": 36564.00000000001,
+     "run_usd": 1811.04,
+     "net_usd": 34752.96000000001
+    },
+    "Phase 1 complete (projected)": {
+     "tasks": {
+      "intake": 2.0,
+      "wire_extraction": 6.76,
+      "cross_doc": 20.0,
+      "exceptions": 24.0,
+      "outputs": 9.0
+     },
+     "minutes": 61.76,
+     "saved_minutes": 178.24,
+     "saved_pct": 0.7426666666666667,
+     "hours_per_year": 3564.8,
+     "fte": 1.9804444444444445,
+     "gross_usd": 196064.0,
+     "run_usd": 1811.04,
+     "net_usd": 194252.96
+    }
+   }
+  }
+ },
+ "recommended": "mistral-ocr+gpt-6-luna",
+ "sensitivity": {
+  "50|0.5": {
+   "hours_per_year": 2057.4,
+   "fte": 1.143,
+   "gross_usd": 113157.0,
+   "run_usd": 1805.52,
+   "net_usd": 111351.48
+  },
+  "50|1.0": {
+   "hours_per_year": 1782.4,
+   "fte": 0.9902222222222222,
+   "gross_usd": 98032.0,
+   "run_usd": 1805.52,
+   "net_usd": 96226.48
+  },
+  "50|1.5": {
+   "hours_per_year": 1507.3999999999999,
+   "fte": 0.8374444444444443,
+   "gross_usd": 82906.99999999999,
+   "run_usd": 1805.52,
+   "net_usd": 81101.47999999998
+  },
+  "100|0.5": {
+   "hours_per_year": 4114.8,
+   "fte": 2.286,
+   "gross_usd": 226314.0,
+   "run_usd": 1811.04,
+   "net_usd": 224502.96
+  },
+  "100|1.0": {
+   "hours_per_year": 3564.8,
+   "fte": 1.9804444444444445,
+   "gross_usd": 196064.0,
+   "run_usd": 1811.04,
+   "net_usd": 194252.96
+  },
+  "100|1.5": {
+   "hours_per_year": 3014.7999999999997,
+   "fte": 1.6748888888888886,
+   "gross_usd": 165813.99999999997,
+   "run_usd": 1811.04,
+   "net_usd": 164002.95999999996
+  },
+  "200|0.5": {
+   "hours_per_year": 8229.6,
+   "fte": 4.572,
+   "gross_usd": 452628.0,
+   "run_usd": 1822.08,
+   "net_usd": 450805.92
+  },
+  "200|1.0": {
+   "hours_per_year": 7129.6,
+   "fte": 3.960888888888889,
+   "gross_usd": 392128.0,
+   "run_usd": 1822.08,
+   "net_usd": 390305.92
+  },
+  "200|1.5": {
+   "hours_per_year": 6029.599999999999,
+   "fte": 3.3497777777777773,
+   "gross_usd": 331627.99999999994,
+   "run_usd": 1822.08,
+   "net_usd": 329805.9199999999
+  }
+ }
+}

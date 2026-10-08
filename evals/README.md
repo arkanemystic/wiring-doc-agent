@@ -49,3 +49,5 @@ All values are fictional except the routing numbers, which are chosen to pass th
 - **Mean confidence (right vs wrong)**: if these are close, the model's confidence cannot be used to flag errors.
 - **Silent errors (2-pass)**: wrong values that two reads would agree on, and that pass the ABA checksum,
   so `EXTRACTION_PASSES=2` would not flag them. Consecutive reads of a document are paired to simulate it.
+
+- `roi/` - Phase 1 ROI eval (replay through the real app + time/cost model); see `roi/README.md`.
