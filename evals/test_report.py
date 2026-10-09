@@ -153,47 +153,47 @@ def build(results: list[dict], truth: dict) -> str:
     expected = "".join(
         f"<tr><td>{e(label(d, truth))}</td><td>{e(truth[d]['bank_name'])}</td><td class=\"num\">{e(truth[d]['routing_number_aba'])}</td>"
         f"<td class=\"num\">{e(mask(truth[d]['account_number']))}</td></tr>" for d in docs)
-    speed = "".join(f"<tr><td>{e(SETUPS[p])}</td><td class=\"num\">{stats[p]['seconds']:.1f} s</td></tr>" for p in ORDER)
     flag_text = (f"The single flag came from the {e(label(flag_doc, truth))} instructions: both models found the bank address, but "
                  f"gpt-6-luna also included the branch line printed above it ({e(flag_cell['flags'][0].split(' read ')[-1])}), so the "
                  "field was marked for a person to confirm. The value in the workbook was correct; the flag shows the cross-check "
                  "working, and costs the reviewer a few seconds." if flag_doc else "No field was flagged.")
+    hook = (f"{ml['right']} of {ml['cells']} values read correctly on real wire documents, every routing and account number "
+            "included, and every uncertain field sent to a person to check." if ml["right"] == ml["cells"] else
+            f"{ml['right']} of {ml['cells']} values read correctly on real wire documents, with disagreements sent to a person to check.")
     return f"""
 <h1>Wire Instruction Extraction: Test Results</h1>
 <p class="dek">Use Case 1 &nbsp;·&nbsp; Real wire documents &nbsp;·&nbsp; October 2026</p>
-
-<h2 style="margin-top:0">Summary</h2>
-<p>Mistral Document AI working with gpt-6-luna read every field correctly on {n_docs} real wire instruction documents, in each of {ml['runs']} runs: {ml['right']} of {ml['cells']} values, including all {ml['money']} routing and account numbers. Where the two models disagreed, the field was flagged for a person to check rather than passed through. gpt-6-luna reading the page image on its own got {lv['right']} of {lv['cells']} values right, and gave its wrong answers the same high confidence as its right ones, which is why the combined setup checks one model against the other instead of trusting a confidence score.</p>
+<p class="hook">{hook}</p>
 
 <div class="figures">
 <div><b>{ml['right']} / {ml['cells']}</b><span>fields correct, Mistral + gpt-6-luna</span></div>
 <div><b>{ml['money_right']} / {ml['money']}</b><span>routing and account numbers correct</span></div>
-<div><b>{len(ml['flags'])}</b><span>field flagged for human review</span></div>
+<div><b>{len(ml['flags'])}</b><span>field flagged where the two models disagreed</span></div>
 <div><b>{ml['seconds']:.1f} s</b><span>median time per document</span></div>
 </div>
 
-<h2>What was tested</h2>
-<p>{n_docs} wire instruction documents from real loans, checked against the expected values on the loan data tape. One is a digital PDF with clear labels, one splits the beneficiary name across two lines, and one ({e(label(scanned, truth))}) is a scanned image with no text layer. Each document was run 3 times through each of three setups: Mistral Document AI reading the page and gpt-6-luna extracting the fields from its text (the setup we recommend), Mistral Document AI alone, and gpt-6-luna reading the page image alone.</p>
 <figure><div class="fighead">Values read correctly, {n_docs} documents × 3 runs</div>{fig_setup_accuracy(stats)}
 <figcaption><b>Figure 1.</b> Both setups that use Mistral to read the page got every value right. gpt-6-luna on its own dropped or misread digits in routing and account numbers in {lv['money'] - lv['money_right']} of {lv['money']} cases.</figcaption></figure>
+<p>Mistral Document AI working with gpt-6-luna read every field correctly on {n_docs} real wire instruction documents, one of them a scan, in each of {ml['runs']} runs. Where the two models disagreed, or a value was uncertain, the field was flagged for a person to check rather than passed through.</p>
 <figure><div class="fighead">Fields right in each run (out of 6)</div>{fig_runs(runs, docs, truth)}
 <figcaption><b>Figure 2.</b> The combined setup was right in all six fields on every run. gpt-6-luna alone varied from run to run on the same document, which makes its output hard to rely on.</figcaption></figure>
 
-<h2>Confidence and flags</h2>
-<p>Each value comes with the model's own confidence score. Figure 3 shows those scores for the recommended setup, run by run.</p>
+<h2>Flags for human review</h2>
 <figure><div class="fighead">Mistral + gpt-6-luna: confidence per field, per run</div>{fig_confidence('mistral+luna', runs, docs, truth)}
 <figcaption><b>Figure 3.</b> All values right. {e(SHORT[flag_field]) if flag_field else ''}{' flagged once where the two models disagreed. ' if flag_field else ''}The beneficiary address scores 0.70 in every run because it is taken from the letterhead rather than a labelled field; the workbook highlights anything below {THRESHOLD:.2f}, so a person confirms it.</figcaption></figure>
 <p>{flag_text}</p>
 <p>A field reaches the reviewer highlighted when the two models disagree, when its confidence is below {THRESHOLD:.2f}, or, for routing numbers, when the ABA check digit fails. Here that meant the letterhead address on each document and the one disagreement; everything else came through ready to use.</p>
-<figure><div class="fighead">gpt-6-luna alone: confidence per field, per run</div>{fig_confidence('luna-vision', runs, docs, truth)}
-<figcaption><b>Figure 4.</b> For comparison. The wrong values (✗) carry the same 0.95 to 0.99 confidence as the right ones, so nothing would have marked them for review.</figcaption></figure>
-<figure><div class="fighead">Average confidence on right and wrong values</div>{fig_conf_right_wrong(stats)}
-<figcaption><b>Figure 5.</b> gpt-6-luna alone was as confident when wrong ({lv['conf_wrong']:.2f}) as when right ({lv['conf_right']:.2f}). Confidence by itself cannot separate the two, so the combined setup relies on agreement between models and on check digits.</figcaption></figure>
 
-<h2>Documents and speed</h2>
+<h2>Why one model is not enough</h2>
+<figure><div class="fighead">Average confidence on right and wrong values</div>{fig_conf_right_wrong(stats)}
+<figcaption><b>Figure 4.</b> gpt-6-luna alone was as confident when wrong ({lv['conf_wrong']:.2f}) as when right ({lv['conf_right']:.2f}). Confidence by itself cannot separate the two, so the combined setup relies on agreement between models and on check digits.</figcaption></figure>
+<figure><div class="fighead">gpt-6-luna alone: confidence per field, per run</div>{fig_confidence('luna-vision', runs, docs, truth)}
+<figcaption><b>Figure 5.</b> For comparison. gpt-6-luna reading the page image alone got {lv['right']} of {lv['cells']} values right, and its wrong values (✗) carry the same 0.95 to 0.99 confidence as the right ones, so nothing would have marked them for review.</figcaption></figure>
+
+<h2>What was tested</h2>
+<p>{n_docs} wire instruction documents from real loans, checked against the expected values on the loan data tape. One is a digital PDF with clear labels, one splits the beneficiary name across two lines, and one ({e(label(scanned, truth))}) is a scanned image with no text layer. Each document was run 3 times through each of three setups: Mistral Document AI reading the page and gpt-6-luna extracting the fields from its text (the setup we recommend), Mistral Document AI alone, and gpt-6-luna reading the page image alone.</p>
 <table><tr><th>Beneficiary</th><th>Bank</th><th class="num">Routing</th><th class="num">Account</th></tr>{expected}</table>
-<table><tr><th>Setup</th><th class="num">Median time per document</th></tr>{speed}</table>
-<p class="note">Account numbers are masked. The combined setup takes longer than either model alone because it makes two calls per document; at 20 documents a day that is still under 3 minutes of processing.</p>
+<p class="note">Account numbers are masked. Median time per document: {ml['seconds']:.1f} s for Mistral + gpt-6-luna, which makes two calls, {stats['mistral']['seconds']:.1f} s for Mistral alone and {lv['seconds']:.1f} s for gpt-6-luna alone.</p>
 
 <h2>What this shows and what it does not</h2>
 <ul class="note">

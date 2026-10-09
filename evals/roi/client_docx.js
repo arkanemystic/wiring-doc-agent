@@ -89,6 +89,8 @@ spec.blocks.forEach((b, i) => {
   else if (b.type === "dek") children.push(new Paragraph({
     spacing: { after: 280 }, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: INK, space: 8 } },
     children: textRuns(b.runs, { font: SANS, size: 20, color: INK2 }) }));
+  else if (b.type === "hook") children.push(new Paragraph({ spacing: { after: 160, line: 300, lineRule: LineRuleType.AUTO },
+    children: textRuns(b.runs, { font: SANS, size: 30, bold: true, color: NAVY }) }));
   else if (b.type === "h2") children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun(b.text)] }));
   else if (b.type === "p") children.push(new Paragraph({ keepNext: beforeTable, children: textRuns(b.runs, b.note ? { size: 18, color: INK2 } : {}) }));
   else if (b.type === "bullets") for (const item of b.items) children.push(new Paragraph({

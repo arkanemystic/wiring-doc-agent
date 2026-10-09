@@ -184,6 +184,11 @@ def usecase1(d: dict) -> str:
         caption += (" Every beneficiary name miss came from one layout whose page text spelled “&” as “&amp;”, which was copied "
                     "into the name. The software now converts it back before extraction; not yet re-tested.")
     per_doc = u["manual_minutes_per_day"] / u["documents_per_day"]
+    all_money = m["money_fields_correct"] == m["money_fields"]
+    hook_tail = (", with every routing and account number read correctly in testing" if all_money else
+                 f", with {m['money_fields_correct']} of {m['money_fields']} routing and account numbers read correctly in testing")
+    flag_sentence = ("Every value the system got wrong was flagged for a person to check." if m["wrong_silent"] == 0 else
+                     f"{m['wrong_silent']} wrong values were not flagged and rely on the reviewer to catch them.")
     docs = u["documents_per_day"]
     scale_rows = "".join(
         f"<tr><td>{r['documents_per_day']:.0f} a day</td><td class=\"num\">{r['manual_minutes_per_day']:.0f} min</td>"
@@ -192,31 +197,30 @@ def usecase1(d: dict) -> str:
     return f"""
 <h1>Use Case 1</h1>
 <p class="dek">Wire Instruction Extraction &nbsp;·&nbsp; Return on investment &nbsp;·&nbsp; October 2026</p>
-
-<h2 style="margin-top:0">Summary</h2>
-<p>Each wire transaction comes with a wire instruction document. Today a person reads each document and keys the beneficiary, bank, routing number and account number, which takes about {per_doc:.0f} minute per document: {u['manual_minutes_per_day']:.0f} minutes for the {docs} documents that arrive on a typical day. Our system processes the same {docs} documents in {u['system_minutes_per_day']:g} minute, {u['speedup']:.0f} times faster.</p>
-<p>That returns about {u['saved_minutes_per_day']:.0f} minutes a day, or {u['hours_per_year']:,.0f} staff hours a year, worth about {k(u['gross_usd'])} a year before running costs and {k(u['net_usd'])} after them. The value grows in step with volume: at {u['scaling'][-1]['documents_per_day']:.0f} documents a day the system needs {u['scaling'][-1]['system_minutes_per_day']:g} minutes where a person would need {u['scaling'][-1]['manual_minutes_per_day'] / 60:.1f} hours. In testing it read {m['money_fields_correct']} of {m['money_fields']} routing and account numbers correctly {flag_clause}.</p>
+<p class="hook">A day's {docs} wire documents, processed in {u['system_minutes_per_day']:g} minute instead of {u['manual_minutes_per_day']:.0f}{hook_tail}.</p>
 
 <div class="figures">
-<div><b>{u['manual_minutes_per_day']:.0f} → {u['system_minutes_per_day']:g} min</b><span>to process {docs} wire documents</span></div>
 <div><b>{u['speedup']:.0f}×</b><span>faster than processing by hand</span></div>
-<div><b>{u['hours_per_year']:,.0f} h</b><span>staff hours returned per year at {docs} documents a day</span></div>
+<div><b>{u['manual_minutes_per_day']:.0f} → {u['system_minutes_per_day']:g} min</b><span>to process {docs} wire documents</span></div>
 <div><b>{m['money_fields_correct'] / m['money_fields']:.0%}</b><span>routing and account numbers read correctly in testing</span></div>
+<div><b>{u['hours_per_year']:,.0f} h</b><span>staff hours returned per year at {docs} documents a day</span></div>
 </div>
 
-<h2>Time per day</h2>
-<p>A person finds each detail in the wire instruction, types it into the workbook and checks it back. The system reads the document, fills in the details and highlights any field that needs a closer look.</p>
 <figure><div class="fighead">Time to process {docs} wire documents</div>
 {fig_bars([("By hand", u['manual_minutes_per_day'], TODAY), ("Our system", u['system_minutes_per_day'], NAVY)], 20, [(0, "0"), (5, "5 min"), (10, "10 min"), (15, "15 min"), (20, "20 min")])}
 <figcaption><b>Figure 1.</b> {docs} documents at about {per_doc:.0f} minute each by hand, against {docs} documents a minute for the system.</figcaption></figure>
+<p>Each wire transaction comes with a wire instruction document. Today a person reads each one and keys the beneficiary, bank, routing number and account number. The system reads the document, fills in those details and highlights any field that needs a closer look, so the time a person spends goes to checking rather than typing.</p>
 
 <h2>Accuracy</h2>
-<p>{t['detail'].replace('packages', 'documents')}</p>
 <figure><div class="fighead">Fields read correctly, {e(t['label'].replace('packages', 'documents'))}</div>{fig_accuracy(m)}
 <figcaption><b>Figure 2.</b> {e(caption)} {m['packages_fully_right']} of {n} documents had all six fields right.</figcaption></figure>
-<p>{t['method']} On average {m['flagged_per_row']:.1f} of the six fields are flagged per document. A character misread when the page is turned into text would pass the other checks; the check digit catches that for routing numbers, and for the other fields the reviewer's comparison with the document remains the control.</p>
+<p>{flag_sentence} {t['method']} On average {m['flagged_per_row']:.1f} of the six fields are flagged per document.</p>
 
-<h2>Annual value</h2>
+<h2>Value grows with volume</h2>
+<p>At {docs} documents a day the system returns about {u['hours_per_year']:,.0f} staff hours a year, worth {k(u['net_usd'])} after running costs. Most of the running cost is hosting, which stays the same as volume rises, so the value grows faster than the volume does.</p>
+<table><tr><th>Documents</th><th class="num">By hand</th><th class="num">Our system</th><th class="num">Hours returned / year</th><th class="num">Net value / year</th></tr>{scale_rows}</table>
+
+<h2>Annual value at {docs} documents a day</h2>
 <table>
 <tr><td>Documents per year ({docs} a day, {u['working_days_per_year']} working days)</td><td class="num">{docs * u['working_days_per_year']:,}</td></tr>
 <tr><td>Staff hours returned per year</td><td class="num">{u['hours_per_year']:,.0f}</td></tr>
@@ -224,8 +228,6 @@ def usecase1(d: dict) -> str:
 <tr><td>Running cost (AI processing and hosting)</td><td class="num">{usd(u['run_usd'])}</td></tr>
 <tr class="total"><td>Net value per year</td><td class="num">{usd(u['net_usd'])}</td></tr>
 </table>
-<div class="keep"><p>Most of the running cost is hosting, which stays the same as volume rises, so the net value grows faster than volume. Per day and per year at different volumes:</p>
-<table><tr><th>Documents</th><th class="num">By hand</th><th class="num">Our system</th><th class="num">Hours returned / year</th><th class="num">Net value / year</th></tr>{scale_rows}</table></div>
 <div class="keep"><p>The build cost is not set yet. The table shows how much this use case could cost to build and still pay for itself at {docs} documents a day.</p>
 {breakeven_table(u)}</div>
 
@@ -236,6 +238,9 @@ def usecase1(d: dict) -> str:
 <tr><td>Azure hosting, storage and monitoring per year</td><td class="num">about ${u['hosting_usd_per_month'] * 12:,.0f}</td></tr>
 </table>
 <p class="note">Azure list prices: Mistral Document AI $3.00 per 1,000 pages; gpt-6-luna $0.10 and $0.50 per million input and output tokens. Hosting is an estimate.</p>
+
+<h2>How it was tested</h2>
+<p class="note">{t['detail'].replace('packages', 'documents')} A character misread when the page is turned into text would pass the other checks; the check digit catches that for routing numbers, and for the other fields the reviewer's comparison with the document remains the control.</p>
 
 <h2>Basis of the figures</h2>
 <ul class="note">
@@ -253,42 +258,42 @@ def phase1(d: dict) -> str:
     return f"""
 <h1>Use Case 2</h1>
 <p class="dek">Treasury Loan Diligence Automation &nbsp;·&nbsp; Return on investment &nbsp;·&nbsp; October 2026</p>
-
-<h2 style="margin-top:0">Summary</h2>
-<p>Use Case 2 automates the rest of the work around the wire instructions: collecting the request and its attachments, checking the settlement statement against the email and the wire, listing exceptions, and preparing the triage workbook, CashPro file and BCMP values. It builds on Use Case 1, which already reads the wire instructions.</p>
-<p>Once Use Case 1 is in place a document takes about {p['package_minutes_before']:.0f} minutes of staff time. Use Case 2 is expected to bring that to about {p['package_minutes_after']:.0f} minutes. At roughly {vol} documents a month that frees a further {p['hours_per_year']:,.0f} staff hours a year, the equivalent of {p['fte']:.1f} full-time positions, worth about {k(p['net_usd'])} a year after running costs of about {usd(p['run_usd'])}. Use Case 2 is not built yet, so these figures are estimates to be confirmed in the pilot.</p>
+<p class="hook">About {p['hours_per_year']:,.0f} staff hours a year back: each document is expected to go from {p['package_minutes_before']:.0f} minutes of staff time to {p['package_minutes_after']:.0f}.</p>
 
 <div class="figures">
-<div><b>{p['package_minutes_before']:.0f} → {p['package_minutes_after']:.0f} min</b><span>expected staff time per document, after Use Case 1</span></div>
-<div><b>{p['hours_per_year']:,.0f} h</b><span>additional staff hours freed per year</span></div>
 <div><b>{k(p['net_usd'])}</b><span>net value per year at {vol} documents a month</span></div>
-<div><b>${p['run_per_package_usd']:.3f}</b><span>AI cost per document for the added steps</span></div>
+<div><b>{p['package_minutes_before']:.0f} → {p['package_minutes_after']:.0f} min</b><span>expected staff time per document, after Use Case 1</span></div>
+<div><b>{p['hours_per_year']:,.0f} h</b><span>staff hours freed per year, about {p['fte']:.1f} full-time positions</span></div>
+<div><b>{k(p['cumulative_24m'][-1])}</b><span>cumulative net value over two years</span></div>
 </div>
 
-<h2>What Use Case 2 adds</h2>
-<ul>
-<li>Request emails and attachments collected into a standard SharePoint folder for each loan.</li>
-<li>Automatic checks between the internal settlement statement, the request email and the wire instructions: amounts, fees, fund, dates, routing number format and masked accounts.</li>
-<li>A list of exceptions for Accounting, each with the reason it was raised.</li>
-<li>The triage workbook, the BOA CashPro import file and the BCMP values, ready for review.</li>
-</ul>
-<p>Accounting keeps the controls it has today: review of the source documents and outputs, resolution of flagged values, CashPro and ProMerit entry, second-person approval and final release. The system prepares payments. It does not send them.</p>
-
-<h2>Where the time goes</h2>
 <figure><div class="fighead">Staff time per document</div>
 {fig_bars([("With Use Case 1", p['package_minutes_before'], TODAY), ("With Use Cases 1 and 2", p['package_minutes_after'], NAVY)], 240, [(0, "0 h"), (60, "1 h"), (120, "2 h"), (180, "3 h"), (240, "4 h")])}
 <figcaption><b>Figure 1.</b> Use Case 2 removes about {p['saved_minutes']:.0f} minutes from each document, {p['saved_pct_of_package']:.0%} of the time left once Use Case 1 is running.</figcaption></figure>
-<figure><div class="fighead">Minutes per document, by task</div>{fig_tasks(tasks, 'With Use Case 1', 'With Use Case 2')}
-<figcaption><b>Figure 2.</b> The largest reduction is in {TASK_NAMES[biggest].lower()}. Exceptions keep the most manual time, because call-backs to verify masked or changed wire details stay with a person.</figcaption></figure>
+<p>Use Case 2 automates the rest of the work around the wire instructions: collecting the request and its attachments, checking the settlement statement against the email and the wire, listing exceptions, and preparing the triage workbook, CashPro file and BCMP values. It builds on Use Case 1, which already reads the wire instructions. It is not built yet, so these figures are estimates to be confirmed in the pilot.</p>
 
 <h2>Annual value</h2>
 {value_table(p, rate)}
+<figure><div class="fighead">Cumulative net value of Use Case 2 over two years</div>{fig_cumulative(p['cumulative_24m'], 'Use Case 2')}
+<figcaption><b>Figure 2.</b> Volume starts at about {vol} documents a month and grows {d['growth']:.0%} a month. With no growth the two-year figure is about {k(p['net_24m_no_growth'])}. Build cost is not included.</figcaption></figure>
+
+<h2>Where the time comes from</h2>
+<figure><div class="fighead">Minutes per document, by task</div>{fig_tasks(tasks, 'With Use Case 1', 'With Use Case 2')}
+<figcaption><b>Figure 3.</b> The largest reduction is in {TASK_NAMES[biggest].lower()}. Exceptions keep the most manual time, because call-backs to verify masked or changed wire details stay with a person.</figcaption></figure>
+
+<h2>What Use Case 2 adds</h2>
+<ul>
+<li>Automatic checks between the internal settlement statement, the request email and the wire instructions: amounts, fees, fund, dates, routing number format and masked accounts.</li>
+<li>The triage workbook, the BOA CashPro import file and the BCMP values, ready for review.</li>
+<li>A list of exceptions for Accounting, each with the reason it was raised.</li>
+<li>Request emails and attachments collected into a standard SharePoint folder for each loan.</li>
+</ul>
+<p>Accounting keeps the controls it has today: review of the source documents and outputs, resolution of flagged values, CashPro and ProMerit entry, second-person approval and final release. The system prepares payments. It does not send them.</p>
+
 <div class="keep"><p>The build cost is not set yet. The table shows how much Use Case 2 could cost to build and still pay for itself from its net value.</p>
 {breakeven_table(p)}</div>
 <div class="keep"><p>The saving depends mainly on volume and on how much review work is left once each step is automated. Net value per year:</p>
 {sensitivity_table(p, ['Half the estimated review work', 'As estimated', '50% more review work'])}</div>
-<figure><div class="fighead">Cumulative net value of Use Case 2 over two years</div>{fig_cumulative(p['cumulative_24m'], 'Use Case 2')}
-<figcaption><b>Figure 3.</b> Volume starts at about {vol} documents a month and grows {d['growth']:.0%} a month. With no growth the two-year figure is about {k(p['net_24m_no_growth'])}. Build cost is not included.</figcaption></figure>
 
 <h2>Running cost</h2>
 <table class="speed">
@@ -311,7 +316,8 @@ CSS = f"""
 @page {{ size: Letter; margin: 0.85in 0.95in 0.9in; }}
 body {{ font-family: 'Bitstream Charter', Charter, Georgia, serif; font-size: 10.3pt; line-height: 1.45; color: {INK}; margin: 0; }}
 h1 {{ font-family: {SANS}; font-size: 21pt; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4pt; }}
-.dek {{ font-family: {SANS}; color: {INK2}; font-size: 10pt; margin: 0 0 18pt; padding-bottom: 12pt; border-bottom: 1.5pt solid {INK}; }}
+.dek {{ font-family: {SANS}; color: {INK2}; font-size: 10pt; margin: 0 0 14pt; padding-bottom: 12pt; border-bottom: 1.5pt solid {INK}; }}
+.hook {{ font-family: {SANS}; font-size: 15pt; line-height: 1.35; font-weight: 600; color: {NAVY}; margin: 0 0 6pt; }}
 h2 {{ font-family: {SANS}; font-size: 12.5pt; font-weight: 600; margin: 16pt 0 5pt; break-after: avoid; }}
 p {{ margin: 0 0 8pt; }}
 .figures {{ display: flex; border-top: 0.75pt solid {RULE}; border-bottom: 0.75pt solid {RULE}; margin: 12pt 0 4pt; font-family: {SANS}; }}

@@ -118,7 +118,7 @@ def blocks_of(source: str, images: list[str]) -> list[dict]:
             elif c.tag == "h2":
                 blocks.append({"type": "h2", "text": " ".join(c.text().split())})
             elif c.tag == "p":
-                blocks.append({"type": "dek" if "dek" in cls else "p", "note": "note" in cls, "runs": runs(c)})
+                blocks.append({"type": "dek" if "dek" in cls else "hook" if "hook" in cls else "p", "note": "note" in cls, "runs": runs(c)})
             elif c.tag == "ul":
                 blocks.append({"type": "bullets", "note": "note" in cls,
                                "items": [runs(li) for li in c.children if not isinstance(li, str) and li.tag == "li"]})
