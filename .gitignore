@@ -7,3 +7,4 @@ local.settings.json
 
 .python_packages
 evals/roi/client_report.html
+evals/real_docs/
