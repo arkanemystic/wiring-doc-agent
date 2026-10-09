@@ -37,6 +37,9 @@ CONFIGS = {
     "gpt-6-luna": ("gpt-6-luna/results.json", "pairs", False),
     "mistral-document-ai-2512-image-only": ("mistral-document-ai-2512-image-only/results.json", "pairs", True),
     "mistral-ocr+gpt-6-luna": ("mistral-ocr+gpt-6-luna/results.json", "pipeline", True),
+    # The built combined unit: gpt-6-luna's extraction from Mistral's OCR text is the answer, Mistral's own
+    # annotation of the page is the second reading it is checked against.
+    "mistral-ocr+gpt-6-luna-extract": ("mistral-ocr+gpt-6-luna/results.json", "pipeline-luna", True),
 }
 
 
@@ -56,11 +59,12 @@ def recorded(path: str, mode: str) -> dict[str, list[tuple[list[dict], list[floa
     out: dict[str, list] = {}
     for doc in DOCS:
         mine = [r for r in runs if r["doc"] == doc]
-        if mode == "pipeline":
-            # Pass 1 = Mistral OCR+annotation, pass 2 = luna on Mistral's text; disagreement is the flag.
-            out[doc] = [([{f: {"value": c["value"], "confidence": c["confidence"], "page": 1} for f, c in r["fields"].items()},
-                          {f: {"value": c["luna_value"], "confidence": c["luna_confidence"], "page": 1} for f, c in r["fields"].items()}],
-                         [r["seconds"] / 2] * 2) for r in mine]
+        if mode in ("pipeline", "pipeline-luna"):
+            # One pass is Mistral OCR+annotation, the other luna on Mistral's text; disagreement is the flag.
+            mistral = lambda r: {f: {"value": c["value"], "confidence": c["confidence"], "page": 1} for f, c in r["fields"].items()}
+            luna = lambda r: {f: {"value": c["luna_value"], "confidence": c["luna_confidence"], "page": 1} for f, c in r["fields"].items()}
+            order = (luna, mistral) if mode == "pipeline-luna" else (mistral, luna)
+            out[doc] = [([order[0](r), order[1](r)], [r["seconds"] / 2] * 2) for r in mine]
         else:
             # Two independent reads of the same document = every ordered pair of distinct recorded reads.
             out[doc] = [([{f: {**a["fields"][f], "page": 1} for f in FIELDS}, {f: {**b["fields"][f], "page": 1} for f in FIELDS}],
@@ -160,13 +164,19 @@ if __name__ == "__main__":
     seed = 7
     if "--seed" in argv:
         i = argv.index("--seed"); seed = int(argv[i + 1]); del argv[i:i + 2]
+    only = None
+    if "--only" in argv:
+        i = argv.index("--only"); only = argv[i + 1]; del argv[i:i + 2]
     packages = int(argv[0]) if argv else 100
     results = []
-    for name in CONFIGS:
+    for name in [only] if only else CONFIGS:
         res = run_config(name, packages, seed)
         rows = res["rows"]
         print(f"{name}: {res['wall_seconds']} s for {packages} packages, review {sum(r['review'] for r in rows)}, "
               f"errors {sum(bool(r['error']) for r in rows)}", flush=True)
         results.append(res)
+    if only:  # replace just this config's run, keep the others
+        existing = json.loads((OUT / "results.json").read_text())
+        results = [r for r in existing["runs"] if r["config"] != only] + results
     (OUT / "results.json").write_text(json.dumps({"generated": time.strftime("%Y-%m-%d"), "runs": results}, indent=1))
     print("wrote", OUT / "results.json")

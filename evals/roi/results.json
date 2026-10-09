@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-08",
+ "generated": "2026-10-09",
  "runs": [
   {
    "config": "gpt-6-luna",
@@ -11409,6 +11409,3817 @@
        "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
        "correct": true,
        "flagged": true
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    }
+   ]
+  },
+  {
+   "config": "mistral-ocr+gpt-6-luna-extract",
+   "packages": 100,
+   "seed": 7,
+   "wall_seconds": 149.4,
+   "model_calls": 200,
+   "concurrency": 8,
+   "deadline_seconds": 200.0,
+   "rows": [
+    {
+     "source": "phase1-batch.zip#IF-0001_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0002_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0003_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0004_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0005_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0006_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0007_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0008_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0009_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0010_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0011_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0012_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0013_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0014_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0015_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0016_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0017_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0018_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0019_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0020_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0021_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0022_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0023_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0024_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0025_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0026_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0027_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0028_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0029_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0030_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0031_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0032_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0033_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0034_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0035_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0036_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0037_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0038_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0039_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0040_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0041_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0042_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0043_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0044_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0045_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0046_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0047_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0048_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0049_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0050_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0051_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0052_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0053_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0054_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0055_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0056_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0057_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0058_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0059_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0060_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0061_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0062_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0063_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0064_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0065_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0066_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0067_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0068_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0069_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0070_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0071_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0072_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0073_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0074_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0075_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0076_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0077_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0078_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0079_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0080_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0081_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0082_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0083_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0084_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0085_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0086_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0087_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0088_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0089_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0090_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0091_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0092_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0093_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0094_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Chesapeake Fiduciary Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "300 Pratt Street, Baltimore, MD 21202",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "052000113",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "3300-0090-1144",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0095_blurry_scan.pdf",
+     "doc": "blurry_scan",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0096_two_page.pdf",
+     "doc": "two_page",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Pellham Ridge Escrow Trust",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "600 Elm Court, Suite 210, Tulsa, OK 74103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Red Prairie National Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "15 Boulder Avenue, Tulsa, OK 74119",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "103000648",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "881-00-7766-1",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0097_baseline.pdf",
+     "doc": "baseline",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Brightwater Escrow Services Client Trust Account",
+       "correct": true,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "2250 Lakeview Drive, Suite 300, Columbus, OH 43215",
+       "correct": true,
+       "flagged": true
+      },
+      "bank_name": {
+       "value": "Meridian Trust Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "400 Commerce Plaza, Dayton, OH 45402",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "021000021",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "7712-558-203",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0098_repeated_digits.pdf",
+     "doc": "repeated_digits",
+     "review": true,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Hollowell &amp; Gibbs Settlement Account",
+       "correct": false,
+       "flagged": true
+      },
+      "beneficiary_address": {
+       "value": "88 Mill Street, Floor 11, Hartford, CT 06103",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Connell Harbor Savings Bank",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "1100 Asylum Avenue, Hartford, CT 06105",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "011000138",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "0001100223",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0099_long_account.pdf",
+     "doc": "long_account",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Sorrento Title Agency LLC",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "4410 Granite Ridge Road, Unit B, Boise, ID 83706",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_name": {
+       "value": "Alpine Mutual Federal Credit Union",
+       "correct": true,
+       "flagged": false
+      },
+      "bank_address": {
+       "value": "77 Front Street, Boise, ID 83702",
+       "correct": true,
+       "flagged": false
+      },
+      "routing_number_aba": {
+       "value": "124100064",
+       "correct": true,
+       "flagged": false
+      },
+      "account_number": {
+       "value": "55500117788004",
+       "correct": true,
+       "flagged": false
+      }
+     }
+    },
+    {
+     "source": "phase1-batch.zip#IF-0100_dense_table.pdf",
+     "doc": "dense_table",
+     "review": false,
+     "error": null,
+     "fields": {
+      "beneficiary_name": {
+       "value": "Kittredge Lane Closing Services",
+       "correct": true,
+       "flagged": false
+      },
+      "beneficiary_address": {
+       "value": "19 Harbor Point, Suite 1200, Baltimore, MD 21231",
+       "correct": true,
+       "flagged": false
       },
       "bank_name": {
        "value": "Chesapeake Fiduciary Bank",

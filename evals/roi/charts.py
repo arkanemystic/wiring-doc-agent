@@ -11,9 +11,9 @@ from evals.harness import DOCS, FIELDS
 
 OUT = Path(__file__).parent
 EVALS = OUT.parent
-CONFIGS = ["gpt-6-luna", "mistral-document-ai-2512-image-only", "mistral-ocr+gpt-6-luna"]
+CONFIGS = ["gpt-6-luna", "mistral-document-ai-2512-image-only", "mistral-ocr+gpt-6-luna", "mistral-ocr+gpt-6-luna-extract"]
 SHORT = {"gpt-6-luna": "gpt-6-luna", "mistral-document-ai-2512-image-only": "Mistral Document AI",
-         "mistral-ocr+gpt-6-luna": "Mistral OCR + gpt-6-luna"}
+         "mistral-ocr+gpt-6-luna": "Mistral OCR + gpt-6-luna", "mistral-ocr+gpt-6-luna-extract": "Mistral OCR → gpt-6-luna extracts"}
 SLOT = {c: i + 1 for i, c in enumerate(CONFIGS)}  # categorical slot follows the config everywhere
 MONEY = ("routing_number_aba", "account_number")
 P1, NOW = "Phase 1 complete (projected)", "Current build (wire extraction live)"
@@ -36,8 +36,15 @@ def cost_parts(c: str, a: dict, pages: float) -> dict:
             "Mistral pages": reads * pages * r.get("usd_per_1000_pages", 0) / 1000}
 
 
+def raw_reads(c: str) -> list[dict]:
+    from evals.roi.replay import CONFIGS as SOURCES
+    return [r for r in json.loads((EVALS / SOURCES[c][0]).read_text())["results"] if "error" not in r]
+
+
 def calibration(c: str) -> tuple[float, float]:
-    reads = [r for r in json.loads((EVALS / c / "results.json").read_text())["results"] if "error" not in r]
+    reads = raw_reads(c)
+    if c.endswith("-extract"):  # the answer is luna's reading of Mistral's text
+        reads = [{"fields": {f: {"confidence": v["luna_confidence"], "correct": v["luna_correct"]} for f, v in r["fields"].items()}} for r in reads]
     cells = [v for r in reads for v in r["fields"].values()]
     right = [v["confidence"] for v in cells if v["correct"]]
     wrong = [v["confidence"] for v in cells if not v["correct"]]
@@ -45,10 +52,10 @@ def calibration(c: str) -> tuple[float, float]:
 
 
 def recorded_seconds(c: str) -> float:
-    reads = [r for r in json.loads((EVALS / c / "results.json").read_text())["results"] if "error" not in r]
+    reads = raw_reads(c)
     per_read = st.median(r["seconds"] for r in reads)
     # Production makes two passes per document; the pipeline's recorded time already covers both of its calls.
-    return per_read if c == "mistral-ocr+gpt-6-luna" else 2 * per_read
+    return per_read if c.startswith("mistral-ocr+gpt-6-luna") else 2 * per_read
 
 
 # ---------- chart builders (HTML bars, SVG lines/heatmaps) ----------
@@ -342,13 +349,13 @@ PAGE = """<!doctype html>
 <title>Initial Funding ROI Dashboard</title>
 <style>
 :root {{ color-scheme: light; --bg:#f9f9f7; --card:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7; --line:rgba(11,11,11,0.10);
-  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100;
   --t1:#2a78d6; --t2:#eb6834; --t3:#1baf7a; --t4:#eda100; --t5:#e87ba4;
   --b100:#cde2fb; --b200:#9ec5f4; --b300:#6da7ec; --b400:#3987e5; --b500:#256abf; --b600:#184f95; --b700:#0d366b; }}
 @media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ color-scheme: dark; --bg:#0d0d0d; --card:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --grid:#2c2c2a; --axis:#383835; --line:rgba(255,255,255,0.10);
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; --t5:#d55181; }} }}
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; --t5:#d55181; }} }}
 :root[data-theme="dark"] {{ color-scheme: dark; --bg:#0d0d0d; --card:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --grid:#2c2c2a; --axis:#383835; --line:rgba(255,255,255,0.10);
-  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; --t5:#d55181; }}
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --t1:#3987e5; --t2:#d95926; --t3:#199e70; --t4:#c98500; --t5:#d55181; }}
 * {{ box-sizing:border-box; }}
 body {{ margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }}
 main {{ max-width:1120px; margin:0 auto; padding:32px 16px 64px; }}

@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-08",
+ "generated": "2026-10-09",
  "configs": {
   "gpt-6-luna": {
    "measured": {
@@ -312,72 +312,157 @@
      "net_usd": 194259.4268
     }
    }
+  },
+  "mistral-ocr+gpt-6-luna-extract": {
+   "measured": {
+    "packages": 100,
+    "wall_seconds": 149.4,
+    "machine_seconds_per_package": 1.494,
+    "failed_rows": 0,
+    "rows_marked_review": 50,
+    "fields": 600,
+    "fields_correct": 583,
+    "money_fields_correct": 200,
+    "money_fields": 200,
+    "wrong_caught": 17,
+    "wrong_silent": 0,
+    "silent_money": 0,
+    "packages_with_silent_error": 0,
+    "false_alarms": 72,
+    "flagged_per_row": 0.89,
+    "pages_per_doc": 1.16,
+    "field_correct": {
+     "beneficiary_name": 83,
+     "beneficiary_address": 100,
+     "bank_name": 100,
+     "bank_address": 100,
+     "routing_number_aba": 100,
+     "account_number": 100
+    },
+    "packages_fully_right": 83,
+    "concurrency": 8,
+    "silent_examples": []
+   },
+   "run_cost_per_package_usd": 0.0038109999999999997,
+   "scenarios": {
+    "Manual today": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 40,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 240,
+     "saved_minutes": 0,
+     "saved_pct": 0.0,
+     "hours_per_year": 0.0,
+     "fte": 0.0,
+     "gross_usd": 0.0,
+     "run_usd": 1804.5732,
+     "net_usd": -1804.5732
+    },
+    "Current build (wire extraction live)": {
+     "tasks": {
+      "intake": 20,
+      "wire_extraction": 5.78,
+      "cross_doc": 80,
+      "exceptions": 40,
+      "outputs": 60
+     },
+     "minutes": 205.78,
+     "saved_minutes": 34.22,
+     "saved_pct": 0.14258333333333334,
+     "hours_per_year": 684.4000000000001,
+     "fte": 0.3802222222222223,
+     "gross_usd": 37642.00000000001,
+     "run_usd": 1804.5732,
+     "net_usd": 35837.42680000001
+    },
+    "Phase 1 complete (projected)": {
+     "tasks": {
+      "intake": 2.0,
+      "wire_extraction": 5.78,
+      "cross_doc": 20.0,
+      "exceptions": 24.0,
+      "outputs": 9.0
+     },
+     "minutes": 60.78,
+     "saved_minutes": 179.22,
+     "saved_pct": 0.74675,
+     "hours_per_year": 3584.3999999999996,
+     "fte": 1.9913333333333332,
+     "gross_usd": 197141.99999999997,
+     "run_usd": 1804.5732,
+     "net_usd": 195337.42679999996
+    }
+   }
   }
  },
- "recommended": "mistral-ocr+gpt-6-luna",
+ "recommended": "mistral-ocr+gpt-6-luna-extract",
  "sensitivity": {
   "50|0.5": {
-   "hours_per_year": 2057.4,
-   "fte": 1.143,
-   "gross_usd": 113157.0,
+   "hours_per_year": 2067.2,
+   "fte": 1.1484444444444444,
+   "gross_usd": 113695.99999999999,
    "run_usd": 1802.2866,
-   "net_usd": 111354.7134
+   "net_usd": 111893.71339999998
   },
   "50|1.0": {
-   "hours_per_year": 1782.4,
-   "fte": 0.9902222222222222,
-   "gross_usd": 98032.0,
+   "hours_per_year": 1792.1999999999998,
+   "fte": 0.9956666666666666,
+   "gross_usd": 98570.99999999999,
    "run_usd": 1802.2866,
-   "net_usd": 96229.7134
+   "net_usd": 96768.71339999998
   },
   "50|1.5": {
-   "hours_per_year": 1507.3999999999999,
-   "fte": 0.8374444444444443,
-   "gross_usd": 82906.99999999999,
+   "hours_per_year": 1517.2,
+   "fte": 0.8428888888888889,
+   "gross_usd": 83446.0,
    "run_usd": 1802.2866,
-   "net_usd": 81104.71339999998
+   "net_usd": 81643.7134
   },
   "100|0.5": {
-   "hours_per_year": 4114.8,
-   "fte": 2.286,
-   "gross_usd": 226314.0,
+   "hours_per_year": 4134.4,
+   "fte": 2.2968888888888888,
+   "gross_usd": 227391.99999999997,
    "run_usd": 1804.5732,
-   "net_usd": 224509.4268
+   "net_usd": 225587.42679999996
   },
   "100|1.0": {
-   "hours_per_year": 3564.8,
-   "fte": 1.9804444444444445,
-   "gross_usd": 196064.0,
+   "hours_per_year": 3584.3999999999996,
+   "fte": 1.9913333333333332,
+   "gross_usd": 197141.99999999997,
    "run_usd": 1804.5732,
-   "net_usd": 194259.4268
+   "net_usd": 195337.42679999996
   },
   "100|1.5": {
-   "hours_per_year": 3014.7999999999997,
-   "fte": 1.6748888888888886,
-   "gross_usd": 165813.99999999997,
+   "hours_per_year": 3034.4,
+   "fte": 1.6857777777777778,
+   "gross_usd": 166892.0,
    "run_usd": 1804.5732,
-   "net_usd": 164009.42679999996
+   "net_usd": 165087.4268
   },
   "200|0.5": {
-   "hours_per_year": 8229.6,
-   "fte": 4.572,
-   "gross_usd": 452628.0,
+   "hours_per_year": 8268.8,
+   "fte": 4.5937777777777775,
+   "gross_usd": 454783.99999999994,
    "run_usd": 1809.1464,
-   "net_usd": 450818.8536
+   "net_usd": 452974.8535999999
   },
   "200|1.0": {
-   "hours_per_year": 7129.6,
-   "fte": 3.960888888888889,
-   "gross_usd": 392128.0,
+   "hours_per_year": 7168.799999999999,
+   "fte": 3.9826666666666664,
+   "gross_usd": 394283.99999999994,
    "run_usd": 1809.1464,
-   "net_usd": 390318.8536
+   "net_usd": 392474.8535999999
   },
   "200|1.5": {
-   "hours_per_year": 6029.599999999999,
-   "fte": 3.3497777777777773,
-   "gross_usd": 331627.99999999994,
+   "hours_per_year": 6068.8,
+   "fte": 3.3715555555555556,
+   "gross_usd": 333784.0,
    "run_usd": 1809.1464,
-   "net_usd": 329818.8535999999
+   "net_usd": 331974.8536
   }
  }
 }

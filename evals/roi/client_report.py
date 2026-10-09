@@ -159,8 +159,12 @@ def test_basis(d: dict) -> dict:
                        f"small type in dense tables, fax-quality scans and details on a second page, all scanned to images. "
                        f"{len(recorded)} live readings of those layouts were run {m['packages']} times through the production software, "
                        "which scores every value and decides what to flag."),
-            "method": ("Mistral Document AI and gpt-6-luna each read the page text, and a field is flagged when they disagree, when its "
-                       "confidence is low, or, for routing numbers, when the ABA check digit fails."),
+            "method": (("Mistral Document AI turns each page into text and gpt-6-luna extracts the fields from that text. Mistral's own "
+                        "reading of the page serves as a check: a field is flagged when the two disagree, when its confidence is low, or, "
+                        "for routing numbers, when the ABA check digit fails.")
+                       if d["config"].endswith("-extract") else
+                       ("Mistral Document AI and gpt-6-luna each read the page text, and a field is flagged when they disagree, when its "
+                        "confidence is low, or, for routing numbers, when the ABA check digit fails.")),
             "seconds": st.median(r["seconds"] for r in recorded), "label": f"{m['packages']} test packages"}
 
 
@@ -178,8 +182,11 @@ def phase0(d: dict) -> str:
     caption = ("Every field was read correctly in every package." if not imperfect else
                "Below 100%: " + "; ".join(f"{FIELD_NAMES[f]}, {m['field_correct'][f]} of {n}" for f in imperfect) + ".")
     if "beneficiary_name" in imperfect:
-        caption += (" The beneficiary name misses were the company name returned instead of the full account name (for example, "
-                    "without “Client Trust Account”). The instructions now ask for the full account name; not yet re-tested.")
+        caption += ((" Every beneficiary name miss came from one layout whose page text spelled “&” as “&amp;”, which was copied "
+                     "into the name. The software now converts it back before extraction; not yet re-tested.")
+                    if d["config"].endswith("-extract") else
+                    (" The beneficiary name misses were the company name returned instead of the full account name (for example, "
+                     "without “Client Trust Account”). The instructions now ask for the full account name; not yet re-tested."))
     seconds = t["seconds"]
     return f"""
 <h1>Phase 0: Wire Instruction Extraction</h1>

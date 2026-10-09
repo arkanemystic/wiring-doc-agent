@@ -97,7 +97,8 @@ def build() -> dict:
     safe = [c for c, r in out["configs"].items() if r["measured"]["wrong_silent"] == 0 and r["measured"]["failed_rows"] == 0]
     # A live run of the production setup outranks replays of recorded reads when it is safe.
     live = [c for c in safe if any(r["config"] == c and r.get("live") for r in data["runs"])]
-    best = live[0] if live else min(safe or out["configs"], key=lambda c: out["configs"][c]["scenarios"]["Phase 1 complete (projected)"]["minutes"])
+    preferred = a.get("preferred_config", {}).get("value")
+    best = live[0] if live else preferred if preferred in safe else min(safe or out["configs"], key=lambda c: out["configs"][c]["scenarios"]["Phase 1 complete (projected)"]["minutes"])
     out["recommended"] = best
     m, cost = out["configs"][best]["measured"], out["configs"][best]["run_cost_per_package_usd"]
     grid = {}
