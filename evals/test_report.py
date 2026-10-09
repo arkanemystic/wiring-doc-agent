@@ -160,7 +160,7 @@ def build(results: list[dict], truth: dict) -> str:
                  "working, and costs the reviewer a few seconds." if flag_doc else "No field was flagged.")
     return f"""
 <h1>Wire Instruction Extraction: Test Results</h1>
-<p class="dek">Phase 1: Use Case 1 &nbsp;·&nbsp; Real wire documents &nbsp;·&nbsp; October 2026</p>
+<p class="dek">Use Case 1 &nbsp;·&nbsp; Real wire documents &nbsp;·&nbsp; October 2026</p>
 
 <h2 style="margin-top:0">Summary</h2>
 <p>Mistral Document AI working with gpt-6-luna read every field correctly on {n_docs} real wire instruction documents, in each of {ml['runs']} runs: {ml['right']} of {ml['cells']} values, including all {ml['money']} routing and account numbers. Where the two models disagreed, the field was flagged for a person to check rather than passed through. gpt-6-luna reading the page image on its own got {lv['right']} of {lv['cells']} values right, and gave its wrong answers the same high confidence as its right ones, which is why the combined setup checks one model against the other instead of trusting a confidence score.</p>

@@ -2,8 +2,8 @@
 
 Usage (from the repo root): python -m evals.roi.client_report
 Reads evals/roi/phases.json (python -m evals.roi.roi, then python -m evals.roi.phases) and writes
-  evals/roi/Phase1_UseCase1_ROI.pdf   Use Case 1, wire instruction extraction, on the client's documents-per-day figures
-  evals/roi/Phase1_UseCase2_ROI.pdf   Use Case 2 title; intake, cross-document checks, exceptions and outputs, on top of Use Case 1
+  evals/roi/UseCase1_ROI.pdf   Use Case 1, wire instruction extraction, on the client's documents-per-day figures
+  evals/roi/UseCase2_ROI.pdf   Use Case 2 title; intake, cross-document checks, exceptions and outputs, on top of Use Case 1
 Needs Playwright with Chromium.
 """
 import html, json, statistics as st
@@ -190,7 +190,7 @@ def usecase1(d: dict) -> str:
         f"<td class=\"num\">{r['system_minutes_per_day']:g} min</td><td class=\"num\">{r['hours_per_year']:,.0f} h</td>"
         f"<td class=\"num{' hl' if r['documents_per_day'] == docs else ''}\">{k(r['net_usd'])}</td></tr>" for r in u["scaling"])
     return f"""
-<h1>Phase 1: Use Case 1</h1>
+<h1>Use Case 1</h1>
 <p class="dek">Wire Instruction Extraction &nbsp;·&nbsp; Return on investment &nbsp;·&nbsp; October 2026</p>
 
 <h2 style="margin-top:0">Summary</h2>
@@ -251,7 +251,7 @@ def phase1(d: dict) -> str:
     tasks = p["tasks"]
     biggest = max(tasks, key=lambda t: tasks[t]["before"] - tasks[t]["after"])
     return f"""
-<h1>Phase 1: Use Case 2</h1>
+<h1>Use Case 2</h1>
 <p class="dek">Treasury Loan Diligence Automation &nbsp;·&nbsp; Return on investment &nbsp;·&nbsp; October 2026</p>
 
 <h2 style="margin-top:0">Summary</h2>
@@ -364,8 +364,8 @@ def main() -> None:
     with sync_playwright() as pw:
         bundled = Path("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")  # pre-installed in cloud sessions
         browser = pw.chromium.launch(executable_path=str(bundled) if bundled.exists() else None)
-        render(usecase1(d), "Phase 1: Use Case 1 – Wire Instruction Extraction", OUT / "Phase1_UseCase1_ROI.pdf", browser)
-        render(phase1(d), "Phase 1: Use Case 2 – Treasury Loan Diligence Automation", OUT / "Phase1_UseCase2_ROI.pdf", browser)
+        render(usecase1(d), "Use Case 1 – Wire Instruction Extraction", OUT / "UseCase1_ROI.pdf", browser)
+        render(phase1(d), "Use Case 2 – Treasury Loan Diligence Automation", OUT / "UseCase2_ROI.pdf", browser)
 
 
 if __name__ == "__main__":
