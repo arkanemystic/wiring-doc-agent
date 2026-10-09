@@ -15,7 +15,7 @@ from evals.roi.replay import CONFIGS
 
 OUT = Path(__file__).parent
 EVALS = OUT.parent
-TASK_NAMES = {"intake": "Intake and package set-up", "wire_extraction": "Wire instruction data entry",
+TASK_NAMES = {"intake": "Intake and document set-up", "wire_extraction": "Wire instruction data entry",
               "cross_doc": "Cross-document checks", "exceptions": "Exceptions and call-backs",
               "outputs": "Workbook, CashPro and BCMP files"}
 FIELD_NAMES = {"routing_number_aba": "Routing number (ABA)", "account_number": "Account number",
@@ -137,7 +137,7 @@ def sensitivity_table(p: dict, column_names: list[str]) -> str:
     rows = "".join(f"<tr><td>{v} a month</td>" + "".join(
         f'<td class="num{" hl" if (v, s) == (100, 1.0) else ""}">{k(p["sensitivity"][f"{v}|{s}"])}</td>' for s in (0.5, 1.0, 1.5)) + "</tr>"
         for v in (50, 100, 200))
-    return ("<table><tr><th>Packages</th>" + "".join(f'<th class="num">{e(c)}</th>' for c in column_names) + f"</tr>{rows}</table>")
+    return ("<table><tr><th>Documents</th>" + "".join(f'<th class="num">{e(c)}</th>' for c in column_names) + f"</tr>{rows}</table>")
 
 
 def test_basis(d: dict) -> dict:
@@ -255,19 +255,19 @@ def phase1(d: dict) -> str:
 <p class="dek">Treasury Loan Diligence Automation &nbsp;·&nbsp; Return on investment &nbsp;·&nbsp; October 2026</p>
 
 <h2 style="margin-top:0">Summary</h2>
-<p>Use Case 2 automates the rest of the package work around the wire instructions: collecting the request and its attachments, checking the settlement statement against the email and the wire, listing exceptions, and preparing the triage workbook, CashPro file and BCMP values. It builds on Use Case 1, which already reads the wire instructions.</p>
-<p>Once Use Case 1 is in place a package takes about {p['package_minutes_before']:.0f} minutes of staff time. Use Case 2 is expected to bring that to about {p['package_minutes_after']:.0f} minutes. At roughly {vol} packages a month that frees a further {p['hours_per_year']:,.0f} staff hours a year, the equivalent of {p['fte']:.1f} full-time positions, worth about {k(p['net_usd'])} a year after running costs of about {usd(p['run_usd'])}. Use Case 2 is not built yet, so these figures are estimates to be confirmed in the pilot.</p>
+<p>Use Case 2 automates the rest of the work around the wire instructions: collecting the request and its attachments, checking the settlement statement against the email and the wire, listing exceptions, and preparing the triage workbook, CashPro file and BCMP values. It builds on Use Case 1, which already reads the wire instructions.</p>
+<p>Once Use Case 1 is in place a document takes about {p['package_minutes_before']:.0f} minutes of staff time. Use Case 2 is expected to bring that to about {p['package_minutes_after']:.0f} minutes. At roughly {vol} documents a month that frees a further {p['hours_per_year']:,.0f} staff hours a year, the equivalent of {p['fte']:.1f} full-time positions, worth about {k(p['net_usd'])} a year after running costs of about {usd(p['run_usd'])}. Use Case 2 is not built yet, so these figures are estimates to be confirmed in the pilot.</p>
 
 <div class="figures">
-<div><b>{p['package_minutes_before']:.0f} → {p['package_minutes_after']:.0f} min</b><span>expected staff time per package, after Use Case 1</span></div>
+<div><b>{p['package_minutes_before']:.0f} → {p['package_minutes_after']:.0f} min</b><span>expected staff time per document, after Use Case 1</span></div>
 <div><b>{p['hours_per_year']:,.0f} h</b><span>additional staff hours freed per year</span></div>
-<div><b>{k(p['net_usd'])}</b><span>net value per year at {vol} packages a month</span></div>
-<div><b>${p['run_per_package_usd']:.3f}</b><span>AI cost per package for the added steps</span></div>
+<div><b>{k(p['net_usd'])}</b><span>net value per year at {vol} documents a month</span></div>
+<div><b>${p['run_per_package_usd']:.3f}</b><span>AI cost per document for the added steps</span></div>
 </div>
 
 <h2>What Use Case 2 adds</h2>
 <ul>
-<li>Request emails and attachments collected into a standard SharePoint package for each loan.</li>
+<li>Request emails and attachments collected into a standard SharePoint folder for each loan.</li>
 <li>Automatic checks between the internal settlement statement, the request email and the wire instructions: amounts, fees, fund, dates, routing number format and masked accounts.</li>
 <li>A list of exceptions for Accounting, each with the reason it was raised.</li>
 <li>The triage workbook, the BOA CashPro import file and the BCMP values, ready for review.</li>
@@ -275,10 +275,10 @@ def phase1(d: dict) -> str:
 <p>Accounting keeps the controls it has today: review of the source documents and outputs, resolution of flagged values, CashPro and ProMerit entry, second-person approval and final release. The system prepares payments. It does not send them.</p>
 
 <h2>Where the time goes</h2>
-<figure><div class="fighead">Staff time per package</div>
+<figure><div class="fighead">Staff time per document</div>
 {fig_bars([("With Use Case 1", p['package_minutes_before'], TODAY), ("With Use Cases 1 and 2", p['package_minutes_after'], NAVY)], 240, [(0, "0 h"), (60, "1 h"), (120, "2 h"), (180, "3 h"), (240, "4 h")])}
-<figcaption><b>Figure 1.</b> Use Case 2 removes about {p['saved_minutes']:.0f} minutes from each package, {p['saved_pct_of_package']:.0%} of the time left once Use Case 1 is running.</figcaption></figure>
-<figure><div class="fighead">Minutes per package, by task</div>{fig_tasks(tasks, 'With Use Case 1', 'With Use Case 2')}
+<figcaption><b>Figure 1.</b> Use Case 2 removes about {p['saved_minutes']:.0f} minutes from each document, {p['saved_pct_of_package']:.0%} of the time left once Use Case 1 is running.</figcaption></figure>
+<figure><div class="fighead">Minutes per document, by task</div>{fig_tasks(tasks, 'With Use Case 1', 'With Use Case 2')}
 <figcaption><b>Figure 2.</b> The largest reduction is in {TASK_NAMES[biggest].lower()}. Exceptions keep the most manual time, because call-backs to verify masked or changed wire details stay with a person.</figcaption></figure>
 
 <h2>Annual value</h2>
@@ -288,20 +288,20 @@ def phase1(d: dict) -> str:
 <div class="keep"><p>The saving depends mainly on volume and on how much review work is left once each step is automated. Net value per year:</p>
 {sensitivity_table(p, ['Half the estimated review work', 'As estimated', '50% more review work'])}</div>
 <figure><div class="fighead">Cumulative net value of Use Case 2 over two years</div>{fig_cumulative(p['cumulative_24m'], 'Use Case 2')}
-<figcaption><b>Figure 3.</b> Volume starts at about {vol} packages a month and grows {d['growth']:.0%} a month. With no growth the two-year figure is about {k(p['net_24m_no_growth'])}. Build cost is not included.</figcaption></figure>
+<figcaption><b>Figure 3.</b> Volume starts at about {vol} documents a month and grows {d['growth']:.0%} a month. With no growth the two-year figure is about {k(p['net_24m_no_growth'])}. Build cost is not included.</figcaption></figure>
 
 <h2>Running cost</h2>
 <table class="speed">
-<tr><td>AI reading of the settlement statement and email, per package</td><td class="num">${p['run_per_package_usd']:.4f}</td></tr>
-<tr><td>AI processing per year at {vol} packages a month</td><td class="num">about ${max(p['run_per_package_usd'] * vol * 12, 1):,.0f}</td></tr>
+<tr><td>AI reading of the settlement statement and email, per document</td><td class="num">${p['run_per_package_usd']:.4f}</td></tr>
+<tr><td>AI processing per year at {vol} documents a month</td><td class="num">about ${max(p['run_per_package_usd'] * vol * 12, 1):,.0f}</td></tr>
 <tr><td>Additional hosting: mailbox and SharePoint automation, storage</td><td class="num">about ${p['hosting_usd_per_month'] * 12:,.0f} a year</td></tr>
 </table>
-<p class="note">Priced at the same Azure rates as Use Case 1, assuming about {d['phase1_pages']} pages per package for the settlement statement and email. Use Case 2 runs on the Azure services Use Case 1 already pays for, so only the additional hosting is counted here.</p>
+<p class="note">Priced at the same Azure rates as Use Case 1, assuming about {d['phase1_pages']} pages per document for the settlement statement and email. Use Case 2 runs on the Azure services Use Case 1 already pays for, so only the additional hosting is counted here.</p>
 
 <h2>Basis of the figures</h2>
 <ul class="note">
-<li><b>Provided by the business:</b> about four hours of staff time per package today, and about {vol} loans a month (from the Treasury loan volume).</li>
-<li><b>Estimated:</b> how the four hours divide across tasks; the share of each task that remains with a person once it is automated (intake {d['residuals']['intake']:.0%}, cross-document checks {d['residuals']['cross_doc']:.0%}, exceptions {d['residuals']['exceptions']:.0%}, output files {d['residuals']['outputs']:.0%}); a loaded staff cost of ${rate} an hour; {d['growth']:.0%} monthly growth; AI pages per package and hosting cost.</li>
+<li><b>Provided by the business:</b> about four hours of staff time per document today, and about {vol} loans a month (from the Treasury loan volume).</li>
+<li><b>Estimated:</b> how the four hours divide across tasks; the share of each task that remains with a person once it is automated (intake {d['residuals']['intake']:.0%}, cross-document checks {d['residuals']['cross_doc']:.0%}, exceptions {d['residuals']['exceptions']:.0%}, output files {d['residuals']['outputs']:.0%}); a loaded staff cost of ${rate} an hour; {d['growth']:.0%} monthly growth; AI pages per document and hosting cost.</li>
 <li><b>Not yet tested:</b> the cross-document checks and exception rules. Their accuracy, and the time they save, will be measured in the pilot alongside the current process.</li>
 <li><b>Not included:</b> the cost of building Use Case 2, and the avoided cost of a misdirected wire. Staff hours freed are capacity for other work, not a budget reduction unless roles change.</li>
 </ul>"""
