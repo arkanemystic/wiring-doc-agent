@@ -347,12 +347,17 @@ def render(body: str, title: str, target: Path, browser) -> None:
     print("wrote", target)
 
 
-def main() -> None:
+def load() -> dict:
     d = json.loads((OUT / "phases.json").read_text())
     a = json.loads((OUT / "assumptions.json").read_text())
     d["review"] = a["review"]
     d["residuals"] = {t: a["tasks"][t]["phase1_residual"] for t in d["phase1"]["tasks"]}
     d["phase1_pages"] = a["phase1_run_cost"]["extra_pages_per_package"]
+    return d
+
+
+def main() -> None:
+    d = load()
     with sync_playwright() as pw:
         bundled = Path("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")  # pre-installed in cloud sessions
         browser = pw.chromium.launch(executable_path=str(bundled) if bundled.exists() else None)

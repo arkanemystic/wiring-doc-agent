@@ -10,6 +10,7 @@ python -m evals.roi.roi          # writes REPORT.md, roi.json, roi.html (client 
 python -m evals.roi.charts       # writes dashboard.html: cost, accuracy, safety, speed and value charts per config
 python -m evals.roi.phases       # separate ROI for Phase 0 (wire extraction) and Phase 1 (rest of the package), phases.json
 python -m evals.roi.client_report  # writes Phase0_Wire_Extraction_ROI.pdf and Phase1_Package_Automation_ROI.pdf
+python -m evals.roi.client_docx    # the same two reports as Word files (.docx), built from the same content
 ```
 
 `live.py` needs `AZURE_AI_FOUNDRY_BASE_URL` / `AZURE_AI_FOUNDRY_API_KEY` (gpt-6-luna) and `MISTRAL_OCR_URL`
