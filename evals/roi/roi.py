@@ -11,6 +11,7 @@ from evals.harness import FIELDS
 
 OUT = Path(__file__).parent
 MONEY_FIELDS = ("routing_number_aba", "account_number")
+NOW, P1_NAME = "Current build (wire extraction live)", "Phase 1 complete (projected)"
 TASKS = ("intake", "wire_extraction", "cross_doc", "exceptions", "outputs")
 
 

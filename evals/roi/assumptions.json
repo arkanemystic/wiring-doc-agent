@@ -78,5 +78,16 @@
     },
     "hosting_usd_per_month": 150,
     "_hosting": "ASSUMED: Azure Functions + Storage + Application Insights for ~100-300 packages/month."
+  },
+  "phase1_run_cost": {
+    "_source": "ASSUMED: Phase 1 also reads the internal settlement statement (ISS) and the request email for cross-document checks. Priced at the same Azure rates as the wire step (Mistral Document AI $3.00 / 1,000 pages; gpt-6-luna $0.10 / $0.50 per 1M tokens). Hosting: Phase 0 carries the base Azure hosting; Phase 1 adds mailbox/SharePoint automation and storage.",
+    "extra_pages_per_package": 4,
+    "usd_per_1000_pages": 3.0,
+    "luna_reads_per_package": 2,
+    "input_tokens_per_read": 3000,
+    "output_tokens_per_read": 800,
+    "usd_per_m_input_tokens": 0.1,
+    "usd_per_m_output_tokens": 0.5,
+    "hosting_usd_per_month": 50
   }
 }
