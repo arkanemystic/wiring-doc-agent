@@ -39,6 +39,28 @@ def phase1_run_per_package(a: dict) -> float:
                                              + c["output_tokens_per_read"] * c["usd_per_m_output_tokens"]) / 1e6)
 
 
+def use_case_1(a: dict, ai_per_document: float) -> dict:
+    """Use Case 1 on the client's axioms: 20 wire documents a day, 1 minute each by hand, 20 a minute by the system."""
+    u = a["use_case_1"]
+    rate, fte_hours, days = a["loaded_cost_per_hour_usd"]["value"], a["working_hours_per_fte_year"]["value"], u["working_days_per_year"]
+    hosting = a["run_cost"]["hosting_usd_per_month"]
+
+    def at(docs_per_day: float) -> dict:
+        manual = docs_per_day * u["manual_minutes_per_document"]
+        system = docs_per_day * u["system_minutes_per_20_documents"] / 20
+        hours = (manual - system) * days / 60
+        run = ai_per_document * docs_per_day * days + hosting * 12
+        return {"documents_per_day": docs_per_day, "manual_minutes_per_day": manual, "system_minutes_per_day": system,
+                "saved_minutes_per_day": manual - system, "hours_per_year": hours, "fte": hours / fte_hours,
+                "gross_usd": hours * rate, "run_usd": run, "net_usd": hours * rate - run,
+                "breakeven_build_usd": {m: (hours * rate - run) * m / 12 for m in (6, 12, 24)}}
+
+    base = at(u["documents_per_day"])
+    return {**base, "speedup": base["manual_minutes_per_day"] / base["system_minutes_per_day"],
+            "ai_per_document_usd": ai_per_document, "hosting_usd_per_month": hosting, "working_days_per_year": days,
+            "scaling": [at(n) for n in (10, 20, 40, 80, 160)]}
+
+
 def build() -> dict:
     roi = json.loads((OUT / "roi.json").read_text())
     a = json.loads((OUT / "assumptions.json").read_text())
@@ -81,6 +103,7 @@ def build() -> dict:
         "phase0": phase(PHASE0_TASKS, today, after0, c["run_cost_per_package_usd"], a["run_cost"]["hosting_usd_per_month"], sens0),
         "phase1": phase(PHASE1_TASKS, after0, after1, p1_run, a["phase1_run_cost"]["hosting_usd_per_month"], sens1),
     }
+    out["uc1"] = use_case_1(a, c["run_cost_per_package_usd"])
     combined = c["scenarios"][P1_NAME]["saved_minutes"]
     assert abs(out["phase0"]["saved_minutes"] + out["phase1"]["saved_minutes"] - combined) < 1e-6, "phases must add up"
     return out

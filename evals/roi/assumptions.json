@@ -102,5 +102,12 @@
   "preferred_config": {
     "value": "mistral-ocr+gpt-6-luna-extract",
     "source": "The setup built into the service (OCR_PROVIDER=mistral): Mistral reads the page, gpt-6-luna extracts. Reports use it when it is safe and no live run exists."
+  },
+  "use_case_1": {
+    "_source": "Client axioms (2026-10-09): wire documents are processed one per wire transaction; a person takes 20 minutes for 20 documents; the system handles 20 documents in 1 minute. Review time is not added. working_days_per_year is a standard planning figure.",
+    "documents_per_day": 20,
+    "manual_minutes_per_document": 1.0,
+    "system_minutes_per_20_documents": 1.0,
+    "working_days_per_year": 250
   }
 }

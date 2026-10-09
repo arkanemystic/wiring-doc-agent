@@ -3,7 +3,7 @@
 Usage (from the repo root): python -m evals.roi.client_docx
 Reads phases.json (like client_report.py), turns each report's HTML into a block list, renders every chart to a
 PNG with Chromium, and calls client_docx.js (the `docx` npm package) to write
-  evals/roi/Phase0_Wire_Extraction_ROI.docx and evals/roi/Phase1_Package_Automation_ROI.docx
+  evals/roi/Phase1_UseCase1_ROI.docx and evals/roi/Phase1_UseCase2_ROI.docx
 """
 import json, os, re, subprocess, tempfile
 from html.parser import HTMLParser
@@ -11,7 +11,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-from evals.roi.client_report import OUT, load, phase0, phase1
+from evals.roi.client_report import OUT, load, phase1, usecase1
 
 VOID = {"br", "img", "meta", "circle", "line", "rect", "polyline", "path"}
 
@@ -165,8 +165,8 @@ def render_svgs(svgs: list[str], folder: Path, prefix: str, browser) -> list[str
 
 def main() -> None:
     d = load()
-    reports = [("Phase 0: Wire Instruction Extraction", phase0(d), OUT / "Phase0_Wire_Extraction_ROI.docx"),
-               ("Phase 1: Package Processing Automation", phase1(d), OUT / "Phase1_Package_Automation_ROI.docx")]
+    reports = [("Phase 1: Use Case 1 – Wire Instruction Extraction", usecase1(d), OUT / "Phase1_UseCase1_ROI.docx"),
+               ("Phase 1: Use Case 2 – Treasury Loan Diligence Automation", phase1(d), OUT / "Phase1_UseCase2_ROI.docx")]
     with tempfile.TemporaryDirectory() as tmp, sync_playwright() as pw:
         bundled = Path("/opt/pw-browsers/chromium-1194/chrome-linux/chrome")  # pre-installed in cloud sessions
         browser = pw.chromium.launch(executable_path=str(bundled) if bundled.exists() else None)
