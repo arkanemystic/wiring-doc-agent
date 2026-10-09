@@ -1,0 +1,274 @@
+{
+ "config": "mistral-ocr+gpt-6-luna-extract",
+ "generated": "2026-10-09",
+ "volume": 100,
+ "growth": 0.03,
+ "rate": 55,
+ "measured": {
+  "packages": 100,
+  "wall_seconds": 149.4,
+  "machine_seconds_per_package": 1.494,
+  "failed_rows": 0,
+  "rows_marked_review": 50,
+  "fields": 600,
+  "fields_correct": 583,
+  "money_fields_correct": 200,
+  "money_fields": 200,
+  "wrong_caught": 17,
+  "wrong_silent": 0,
+  "silent_money": 0,
+  "packages_with_silent_error": 0,
+  "false_alarms": 72,
+  "flagged_per_row": 0.89,
+  "pages_per_doc": 1.16,
+  "field_correct": {
+   "beneficiary_name": 83,
+   "beneficiary_address": 100,
+   "bank_name": 100,
+   "bank_address": 100,
+   "routing_number_aba": 100,
+   "account_number": 100
+  },
+  "packages_fully_right": 83,
+  "concurrency": 8,
+  "silent_examples": []
+ },
+ "phase0": {
+  "tasks": {
+   "wire_extraction": {
+    "before": 40,
+    "after": 5.78
+   }
+  },
+  "package_minutes_before": 240,
+  "package_minutes_after": 205.78,
+  "saved_minutes": 34.22,
+  "saved_pct_of_package": 0.14258333333333334,
+  "run_per_package_usd": 0.0038109999999999997,
+  "hosting_usd_per_month": 150,
+  "hours_per_year": 684.4000000000001,
+  "fte": 0.3802222222222223,
+  "gross_usd": 37642.00000000001,
+  "run_usd": 1804.5732,
+  "net_usd": 35837.42680000001,
+  "cumulative_24m": [
+   2986.4522333333334,
+   6066.998033666667,
+   9244.46020801,
+   12521.746247583633,
+   15901.850868344476,
+   19387.858627728143,
+   22982.946619893322,
+   26690.387251823457,
+   30513.551102711495,
+   34455.909869126175,
+   38521.03939853329,
+   42712.62281382263,
+   47034.45373157064,
+   51490.439576851095,
+   56084.604997489965,
+   60821.095380748,
+   65704.18047550377,
+   70738.25812310222,
+   75927.85810012862,
+   81277.64607646581,
+   86792.42769209312,
+   92477.15275618924,
+   98336.91957220825,
+   104376.97939270784
+  ],
+  "net_24m_no_growth": 71674.85360000002,
+  "breakeven_build_usd": {
+   "6": 17918.713400000004,
+   "12": 35837.42680000001,
+   "24": 71674.85360000002
+  },
+  "sensitivity": {
+   "50|0.5": 18608.213399999997,
+   "50|1.0": 17018.713400000004,
+   "50|1.5": 15429.2134,
+   "100|0.5": 39016.426799999994,
+   "100|1.0": 35837.42680000001,
+   "100|1.5": 32658.4268,
+   "200|0.5": 79832.85359999999,
+   "200|1.0": 73474.85360000002,
+   "200|1.5": 67116.8536
+  }
+ },
+ "phase1": {
+  "tasks": {
+   "intake": {
+    "before": 20,
+    "after": 2.0
+   },
+   "cross_doc": {
+    "before": 80,
+    "after": 20.0
+   },
+   "exceptions": {
+    "before": 40,
+    "after": 24.0
+   },
+   "outputs": {
+    "before": 60,
+    "after": 9.0
+   }
+  },
+  "package_minutes_before": 205.78,
+  "package_minutes_after": 60.78,
+  "saved_minutes": 145.0,
+  "saved_pct_of_package": 0.7046360190494703,
+  "run_per_package_usd": 0.0134,
+  "hosting_usd_per_month": 50,
+  "hours_per_year": 2900.0,
+  "fte": 1.6111111111111112,
+  "gross_usd": 159500.0,
+  "run_usd": 616.08,
+  "net_usd": 158883.92,
+  "cumulative_24m": [
+   13240.326666666666,
+   26879.363133333332,
+   40929.070693999995,
+   55401.76948148666,
+   70310.14923259793,
+   85667.28037624253,
+   101486.62545419647,
+   117782.05088448904,
+   134567.83907769038,
+   151858.70091668775,
+   169669.78861085506,
+   188016.7089358474,
+   206915.53687058948,
+   226382.82964337384,
+   246435.64119934174,
+   267091.5371019887,
+   288368.60988171503,
+   310285.49484483316,
+   332861.3863568448,
+   356116.0546142168,
+   380069.86291931,
+   404743.78547355597,
+   430159.42570442933,
+   456339.0351422289
+  ],
+  "net_24m_no_growth": 317767.84,
+  "breakeven_build_usd": {
+   "6": 79441.96,
+   "12": 158883.92,
+   "24": 317767.84
+  },
+  "sensitivity": {
+   "50|0.5": 94266.96,
+   "50|1.0": 79141.96,
+   "50|1.5": 64016.96,
+   "100|0.5": 189133.92,
+   "100|1.0": 158883.92,
+   "100|1.5": 128633.92,
+   "200|0.5": 378867.84,
+   "200|1.0": 318367.84,
+   "200|1.5": 257867.84
+  }
+ },
+ "uc1": {
+  "documents_per_day": 20,
+  "manual_minutes_per_day": 20.0,
+  "system_minutes_per_day": 1.0,
+  "saved_minutes_per_day": 19.0,
+  "hours_per_year": 79.16666666666667,
+  "fte": 0.04398148148148148,
+  "gross_usd": 4354.166666666667,
+  "run_usd": 1819.055,
+  "net_usd": 2535.1116666666667,
+  "breakeven_build_usd": {
+   "6": 1267.5558333333333,
+   "12": 2535.1116666666667,
+   "24": 5070.223333333333
+  },
+  "speedup": 20.0,
+  "ai_per_document_usd": 0.0038109999999999997,
+  "hosting_usd_per_month": 150,
+  "working_days_per_year": 250,
+  "scaling": [
+   {
+    "documents_per_day": 10,
+    "manual_minutes_per_day": 10.0,
+    "system_minutes_per_day": 0.5,
+    "saved_minutes_per_day": 9.5,
+    "hours_per_year": 39.583333333333336,
+    "fte": 0.02199074074074074,
+    "gross_usd": 2177.0833333333335,
+    "run_usd": 1809.5275,
+    "net_usd": 367.55583333333357,
+    "breakeven_build_usd": {
+     "6": 183.77791666666678,
+     "12": 367.55583333333357,
+     "24": 735.1116666666671
+    }
+   },
+   {
+    "documents_per_day": 20,
+    "manual_minutes_per_day": 20.0,
+    "system_minutes_per_day": 1.0,
+    "saved_minutes_per_day": 19.0,
+    "hours_per_year": 79.16666666666667,
+    "fte": 0.04398148148148148,
+    "gross_usd": 4354.166666666667,
+    "run_usd": 1819.055,
+    "net_usd": 2535.1116666666667,
+    "breakeven_build_usd": {
+     "6": 1267.5558333333333,
+     "12": 2535.1116666666667,
+     "24": 5070.223333333333
+    }
+   },
+   {
+    "documents_per_day": 40,
+    "manual_minutes_per_day": 40.0,
+    "system_minutes_per_day": 2.0,
+    "saved_minutes_per_day": 38.0,
+    "hours_per_year": 158.33333333333334,
+    "fte": 0.08796296296296297,
+    "gross_usd": 8708.333333333334,
+    "run_usd": 1838.11,
+    "net_usd": 6870.223333333334,
+    "breakeven_build_usd": {
+     "6": 3435.111666666667,
+     "12": 6870.223333333334,
+     "24": 13740.446666666669
+    }
+   },
+   {
+    "documents_per_day": 80,
+    "manual_minutes_per_day": 80.0,
+    "system_minutes_per_day": 4.0,
+    "saved_minutes_per_day": 76.0,
+    "hours_per_year": 316.6666666666667,
+    "fte": 0.17592592592592593,
+    "gross_usd": 17416.666666666668,
+    "run_usd": 1876.22,
+    "net_usd": 15540.446666666669,
+    "breakeven_build_usd": {
+     "6": 7770.223333333334,
+     "12": 15540.446666666669,
+     "24": 31080.893333333337
+    }
+   },
+   {
+    "documents_per_day": 160,
+    "manual_minutes_per_day": 160.0,
+    "system_minutes_per_day": 8.0,
+    "saved_minutes_per_day": 152.0,
+    "hours_per_year": 633.3333333333334,
+    "fte": 0.35185185185185186,
+    "gross_usd": 34833.333333333336,
+    "run_usd": 1952.44,
+    "net_usd": 32880.89333333333,
+    "breakeven_build_usd": {
+     "6": 16440.446666666667,
+     "12": 32880.89333333333,
+     "24": 65761.78666666667
+    }
+   }
+  ]
+ }
+}

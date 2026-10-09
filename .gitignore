@@ -6,3 +6,5 @@ local.settings.json
 *.py[cod]
 
 .python_packages
+evals/roi/client_report.html
+evals/real_docs/

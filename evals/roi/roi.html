@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Initial Funding ROI</title>
+<style>
+:root { color-scheme: light; --bg:#fcfcfb; --card:#ffffff; --ink:#0b0b0b; --ink2:#52514e; --line:#e4e3df; --bad:#b42318;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --bg:#1a1a19; --card:#232322; --ink:#fff; --ink2:#c3c2b7; --line:#3a3a38; --bad:#f97066;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; } }
+:root[data-theme="dark"] { color-scheme: dark; --bg:#1a1a19; --card:#232322; --ink:#fff; --ink2:#c3c2b7; --line:#3a3a38; --bad:#f97066;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, Segoe UI, sans-serif; }
+main { max-width:960px; margin:0 auto; padding:32px 16px 64px; }
+h1 { font-size:26px; margin:0 0 4px; } h2 { font-size:18px; margin:36px 0 12px; }
+.sub { color:var(--ink2); margin:0 0 24px; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:12px; }
+.tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+.tile b { display:block; font-size:28px; font-variant-numeric:tabular-nums; } .tile span { color:var(--ink2); font-size:13px; }
+.bar-row { margin:10px 0; } .bar-label { display:flex; justify-content:space-between; font-size:13px; color:var(--ink2); }
+.bar { width:100%; height:28px; display:block; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:13px; color:var(--ink2); margin-top:8px; }
+.legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:13px; font-variant-numeric:tabular-nums; }
+th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--ink2); font-weight:600; }
+td.bad { color:var(--bad); font-weight:700; }
+.note { color:var(--ink2); font-size:13px; } ul { padding-left:20px; }
+</style></head><body><main>
+<h1>Initial Funding Phase 1: ROI</h1>
+<p class="sub">Measured on the production extraction code with recorded live model reads (2026-10-09); task times and rates are stated assumptions.</p>
+<div class="tiles">
+<div class="tile"><b>4 h &rarr; 1.0 h</b><span>person-time per package, Phase 1 complete (projected)</span></div>
+<div class="tile"><b>14%</b><span>saved per package today, wire extraction only (684 h/yr)</span></div>
+<div class="tile"><b>3,584 h</b><span>hours returned per year (2.0 FTE) at 100 packages/month</span></div>
+<div class="tile"><b>$195k</b><span>net per year after model and hosting cost</span></div>
+<div class="tile"><b>1.5 s</b><span>machine time per package (100 packages in 149 s)</span></div>
+</div>
+<h2>Where the 4 hours go</h2>
+<div class="bar-row"><div class="bar-label">Manual today<span>240 min</span></div><svg class="bar" role="img" aria-label="Manual today: 240 minutes"><rect x="0%" y="0" width="8.333333333333332%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s1)"><title>Intake: 20 min</title></rect><rect x="8.333333333333332%" y="0" width="16.666666666666664%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s2)"><title>Wire extraction: 40 min</title></rect><rect x="24.999999999999996%" y="0" width="33.33333333333333%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s3)"><title>Cross-document validation: 80 min</title></rect><rect x="58.33333333333333%" y="0" width="16.666666666666664%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s4)"><title>Exceptions: 40 min</title></rect><rect x="75.0%" y="0" width="25.0%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s5)"><title>Outputs: 60 min</title></rect></svg></div><div class="bar-row"><div class="bar-label">Current build (wire extraction live)<span>206 min</span></div><svg class="bar" role="img" aria-label="Current build (wire extraction live): 206 minutes"><rect x="0%" y="0" width="8.333333333333332%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s1)"><title>Intake: 20 min</title></rect><rect x="8.333333333333332%" y="0" width="2.4083333333333337%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s2)"><title>Wire extraction: 6 min</title></rect><rect x="10.741666666666665%" y="0" width="33.33333333333333%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s3)"><title>Cross-document validation: 80 min</title></rect><rect x="44.074999999999996%" y="0" width="16.666666666666664%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s4)"><title>Exceptions: 40 min</title></rect><rect x="60.74166666666666%" y="0" width="25.0%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s5)"><title>Outputs: 60 min</title></rect></svg></div><div class="bar-row"><div class="bar-label">Phase 1 complete (projected)<span>61 min</span></div><svg class="bar" role="img" aria-label="Phase 1 complete (projected): 61 minutes"><rect x="0%" y="0" width="0.8333333333333334%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s1)"><title>Intake: 2 min</title></rect><rect x="0.8333333333333334%" y="0" width="2.4083333333333337%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s2)"><title>Wire extraction: 6 min</title></rect><rect x="3.241666666666667%" y="0" width="8.333333333333332%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s3)"><title>Cross-document validation: 20 min</title></rect><rect x="11.575%" y="0" width="10.0%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s4)"><title>Exceptions: 24 min</title></rect><rect x="21.575%" y="0" width="3.75%" height="28" rx="4" stroke="var(--bg)" stroke-width="2" fill="var(--s5)"><title>Outputs: 9 min</title></rect></svg></div>
+<div class="legend"><span><i style="background:var(--s1)"></i>Intake</span><span><i style="background:var(--s2)"></i>Wire extraction</span><span><i style="background:var(--s3)"></i>Cross-document validation</span><span><i style="background:var(--s4)"></i>Exceptions</span><span><i style="background:var(--s5)"></i>Outputs</span></div>
+<p class="note">Current build automates wire extraction only: 14% saved per package. Wire-extraction time after automation is measured review load; the other tasks' residuals are assumptions.</p>
+<div class="scroll"><table><tr><th>Task (minutes)</th><th>Manual today</th><th>Current build (wire extraction live)</th><th>Phase 1 complete (projected)</th></tr><tr><td>Intake: pull request email + attachments, build package folder</td><td>20</td><td>20</td><td>2</td></tr><tr><td>Wire extraction: key beneficiary, bank, ABA, account, addresses</td><td>40</td><td>6</td><td>6</td></tr><tr><td>Cross-document validation: ISS vs email vs wire (amounts, fees, fund, dates)</td><td>80</td><td>80</td><td>20</td></tr><tr><td>Exceptions: identify, document, call-back on masked/conflicting values</td><td>40</td><td>40</td><td>24</td></tr><tr><td>Outputs: IF triage workbook, BOA CashPro CSV, BCMP wet-funding values</td><td>60</td><td>60</td><td>9</td></tr>
+<tr><th>Total</th><th>240</th><th>206</th><th>61</th></tr></table></div>
+<h2>Which extraction setup is safe to credit</h2>
+<div class="scroll"><table><tr><th>Config</th><th>ABA + account right</th><th>Wrong, flagged</th><th>Wrong, NOT flagged</th><th>Flagged fields / pkg</th><th>Batch time (100 pkgs)</th><th>Saving now</th><th>Phase 1 saving</th></tr><tr><td>gpt-6-luna</td><td>49/200</td><td>125</td><td class="bad">93</td><td>1.77</td><td>113 s</td><td>14%</td><td>74%</td></tr><tr><td>mistral-document-ai-2512-image-only</td><td>200/200</td><td>0</td><td class="bad">50</td><td>0.83</td><td>179 s</td><td>14%</td><td>75%</td></tr><tr><td>mistral-ocr+gpt-6-luna</td><td>200/200</td><td>42</td><td class="">0</td><td>1.38</td><td>148 s</td><td>14%</td><td>74%</td></tr><tr><td>mistral-ocr+gpt-6-luna-extract (recommended)</td><td>200/200</td><td>17</td><td class="">0</td><td>0.89</td><td>149 s</td><td>14%</td><td>75%</td></tr></table></div>
+<p class="note">A wrong value that is not flagged reaches the CashPro file unless the human reviewer catches it. Savings are only credited for a config with none.</p>
+<h2>Sensitivity: net $ per year, Phase 1 complete</h2>
+<div class="scroll"><table><tr><th>Packages / month</th><th>Half the assumed residual work</th><th>As assumed</th><th>1.5x residual work</th></tr><tr><td>50</td><td>$112k</td><td>$97k</td><td>$82k</td></tr><tr><td>100</td><td>$226k</td><td>$195k</td><td>$165k</td></tr><tr><td>200</td><td>$453k</td><td>$392k</td><td>$332k</td></tr></table></div>
+<h2>Caveats</h2>
+<ul class="note">
+<li>The 4 h split across tasks, residual human effort, review minutes, volume (100/month) and $55/h loaded cost are assumptions to be replaced by the pilot time study.</li>
+<li>Intake, cross-document validation, exceptions and output files are not built yet; their savings are projections.</li>
+<li>Test documents are 6 synthetic layouts designed to stress digit reading; re-run on the held-out real wire set before sign-off.</li>
+<li>Human review, approval, bank import and release remain mandatory in every scenario.</li>
+</ul>
+</main></body></html>
